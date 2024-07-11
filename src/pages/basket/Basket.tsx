@@ -1,11 +1,21 @@
-// @flow 
-import * as React from 'react';
+// src/pages/basket/Basket.tsx
+import React, { useContext } from 'react';
+import { CartContext } from '../../context/CartContext';
 
-function Basket () {
+const Basket: React.FC = () => {
+	const cartContext = useContext(CartContext);
+
+	if (!cartContext) {
+		return null;
+	}
+
+	const { cartItems } = cartContext;
+
 	return (
 		<div>
-		Basket
-			</div>
+			<h1>Basket</h1>
+			<p>Items in cart: {cartItems}</p>
+		</div>
 	);
 };
 
