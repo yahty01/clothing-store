@@ -1,35 +1,19 @@
-import React from 'react';
-import {TodoList} from "./TodoList";
-
-
-export type TasksProps = {
-  id: number
-  title: string
-  isDone: boolean
-}
-
-export const tasks1: TasksProps[]= [
-  { id: 3, title: 'ReactJS', isDone: false },
-  { id: 5, title: 'Typescript', isDone: false },
-  { id: 6, title: 'RTK query', isDone: false },
-]
-
-export const tasks2:TasksProps[] = [
-  { id: 1, title: 'My Home ', isDone: true },//0
-  { id: 2, title: '223', isDone: true }, //1
-  { id: 3, title: '33', isDone: false },//2
-  { id: 4, title: '33', isDone: false },//2
-]
-export const tasks3:TasksProps[] = []
+import React from 'react'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import Basket from "./pages/basket/Basket";
+import HomePage from "./pages/homePage/HomePage";
+import Navigation from "./components/Navigator/Navigator";
 
 function App() {
-    return (
-        <div className="App">
-            <TodoList title='new title' tasks={tasks1} />
-            <TodoList title='new 2' tasks={tasks2}/>
-            <TodoList title='new 3' tasks={tasks3}/>
-        </div>
-    );
+  return (
+    <Router>
+      <Navigation />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<Basket />} />
+      </Routes>
+    </Router>
+  )
 }
 
-export default App;
+export default App
