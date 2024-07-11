@@ -1,4 +1,4 @@
-// src/components/Navigator/Navigator.tsx
+// src/components/navigator/navigator.tsx
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { CartContext } from '../../context/CartContext';
