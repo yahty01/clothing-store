@@ -33,8 +33,8 @@ export const GlobalStyle = createGlobalStyle`
     list-style: none;
   }
 
-  button {
-    background-color: unset;
-    border: none;
-  }
+  //button {
+  //  background-color: unset;
+  //  border: none;
+  //}
 `

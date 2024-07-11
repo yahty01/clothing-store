@@ -1,19 +1,23 @@
-import React from 'react'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import Basket from "./pages/basket/Basket";
-import HomePage from "./pages/homePage/HomePage";
-import Navigation from "./components/Navigator/Navigator";
+// src/App.tsx
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Basket from './pages/basket/Basket';
+import HomePage from './pages/homePage/HomePage';
+import Navigation from './components/Navigator/Navigator';
+import { CartProvider } from './context/CartContext';
 
-function App() {
+const App: React.FC = () => {
   return (
-    <Router>
-      <Navigation />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/about" element={<Basket />} />
-      </Routes>
-    </Router>
-  )
+    <CartProvider>
+      <Router>
+        <Navigation />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/basket" element={<Basket />} />
+        </Routes>
+      </Router>
+    </CartProvider>
+  );
 }
 
-export default App
+export default App;
