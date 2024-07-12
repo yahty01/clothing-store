@@ -1,8 +1,8 @@
-import {createGlobalStyle} from "styled-components";
+import { createGlobalStyle } from 'styled-components';
+import {theme} from "./theme";
 
 export const GlobalStyle = createGlobalStyle`
   *, *::before, *::after {
-    //Запись p0+m0 + TAB    
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -14,15 +14,20 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    background-color: rgba(47, 107, 97, 0.33);
-    margin: 0;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    tab-size: 4;
+    font-feature-settings: normal;
+    background-color: ${theme.mainBackgroundColor};
+    color: ${theme.mainTextColor};
 
-    & > div > div {
-      display: flex;
-      gap: 10px;
-    }
+    //& > div > div {
+    //  display: flex;
+    //  gap: 10px;
+    //}
   }
 
   a {
