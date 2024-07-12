@@ -1,29 +1,28 @@
 import React from 'react';
 import styled from "styled-components";
-import {NavLink} from 'react-router-dom';
-import {Button} from "@mui/material";
+import { NavLink } from 'react-router-dom';
+import { Button } from "@mui/material";
+import { theme } from "../../styles/theme";
+import logoA from '../../assets/images/logoA.svg';  // Импортируйте ваш SVG логотип
 
 export const Navigation = () => {
 	return (
 		<GeneralDiv>
 			<DivForButton>
+				<LogoLink to="/">
+					<Logo src={logoA} alt="logo" />
+				</LogoLink>
+				<StyleDivForButton>
+					<StyledButton variant="text" size="small">
+						<StyledNavLink to="/">Главная/</StyledNavLink>
+					</StyledButton>
+				</StyleDivForButton>
 
-				<StyleForButton>
-					<Button variant="contained" color={'inherit'} size={'small'}>
-						<NavLink to="/" style={{textDecoration: 'none'}}>
-							Главная/
-						</NavLink>
-					</Button>
-				</StyleForButton>
-
-				<StyleForButton>
-					<Button variant="contained" color={'inherit'} size={'small'}>
-						<NavLink to="/Basket" style={{textDecoration: 'none'}}>
-							Корзина/
-						</NavLink>
-					</Button>
-				</StyleForButton>
-
+				<StyleDivForButton>
+					<StyledButton variant="text" size="small">
+						<StyledNavLink to="/Basket">Корзина/</StyledNavLink>
+					</StyledButton>
+				</StyleDivForButton>
 			</DivForButton>
 		</GeneralDiv>
 	);
@@ -32,16 +31,48 @@ export const Navigation = () => {
 const GeneralDiv = styled.div`
   height: 50px;
   width: 100%;
-  background-color: cadetblue;
+  background-color: ${theme.mainBackgroundColor};
   display: flex;
   align-items: center;
+  outline: black 1px solid;
 `;
 
 const DivForButton = styled.div`
-  margin-left: 37%;
+  width: 92.135%;
   display: flex;
+  align-items: center;
+  justify-content: space-between;
 `;
 
-const StyleForButton = styled.div`
+const StyleDivForButton = styled.div`
   padding: 0 5px;
+`;
+
+const StyledButton = styled(Button)`
+  && {
+    background-color: ${theme.mainBackgroundColor};
+    color: ${theme.mainTextColor};
+    border-radius: 8px;
+    padding: 8px 16px;
+    &:hover {
+	    background-color: transparent;
+      color: ${theme.secondaryTextColor};
+	    box-shadow: none;
+    }
+  }
+`;
+
+const LogoLink = styled(NavLink)`
+  margin-right: 16px;
+  margin-left: 70px;
+`;
+
+const Logo = styled.img`
+  width: 49px;  // Установите размер логотипа
+  height: 42px;
+`;
+
+const StyledNavLink = styled(NavLink)`
+  text-decoration: none;
+  color: inherit;
 `;
