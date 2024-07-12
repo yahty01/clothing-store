@@ -1,23 +1,47 @@
-// src/components/navigator/navigator.tsx
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
-import { CartContext } from '../../context/CartContext';
+import React from 'react';
+import styled from "styled-components";
+import {NavLink} from 'react-router-dom';
+import {Button} from "@mui/material";
 
-const Navigation: React.FC = () => {
-	const cartContext = useContext(CartContext);
-
-	if (!cartContext) {
-		return null;
-	}
-
-	const { cartItems } = cartContext;
-
+export const Navigation = () => {
 	return (
-		<nav>
-			<Link to="/">Home</Link>
-			<Link to="/basket">Basket ({cartItems})</Link>
-		</nav>
+		<GeneralDiv>
+			<DivForButton>
+
+				<StyleForButton>
+					<Button variant="contained" color={'inherit'} size={'small'}>
+						<NavLink to="/" style={{textDecoration: 'none'}}>
+							Главная/
+						</NavLink>
+					</Button>
+				</StyleForButton>
+
+				<StyleForButton>
+					<Button variant="contained" color={'inherit'} size={'small'}>
+						<NavLink to="/Basket" style={{textDecoration: 'none'}}>
+							Корзина/
+						</NavLink>
+					</Button>
+				</StyleForButton>
+
+			</DivForButton>
+		</GeneralDiv>
 	);
 };
 
-export default Navigation;
+const GeneralDiv = styled.div`
+  height: 50px;
+  width: 100%;
+  background-color: cadetblue;
+  display: flex;
+  align-items: center;
+`;
+
+const DivForButton = styled.div`
+  margin-left: 37%;
+  display: flex;
+`;
+
+const StyleForButton = styled.div`
+  padding: 0 5px;
+`;

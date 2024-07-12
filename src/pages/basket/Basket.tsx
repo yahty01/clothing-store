@@ -1,22 +1,13 @@
-// src/pages/basket/Basket.tsx
-import React, { useContext } from 'react';
-import { CartContext } from '../../context/CartContext';
+// @flow
+import * as React from 'react';
 
-const Basket: React.FC = () => {
-	const cartContext = useContext(CartContext);
+type Props = {
 
-	if (!cartContext) {
-		return null;
-	}
-
-	const { cartItems } = cartContext;
-
+};
+export const Basket = (props: Props) => {
 	return (
 		<div>
-			<h1>Basket</h1>
-			<p>Items in cart: {cartItems}</p>
+			<p>i`m basket</p>
 		</div>
 	);
 };
-
-export default Basket;
