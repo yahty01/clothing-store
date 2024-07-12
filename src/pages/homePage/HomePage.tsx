@@ -1,22 +1,13 @@
-// src/pages/homePage/HomePage.tsx
-import React, { useContext } from 'react';
-import { CartContext } from '../../context/CartContext';
+// @flow
+import * as React from 'react';
 
-const HomePage: React.FC = () => {
-	const cartContext = useContext(CartContext);
+type Props = {
 
-	if (!cartContext) {
-		return null;
-	}
-
-	const { addToCart } = cartContext;
-
+};
+export const HomePage = (props: Props) => {
 	return (
 		<div>
-			<h1>Home Page</h1>
-			<button onClick={addToCart}>Add to Cart</button>
+			<p>i`m Home Page</p>
 		</div>
 	);
 };
-
-export default HomePage;
