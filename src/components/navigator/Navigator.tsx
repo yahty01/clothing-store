@@ -9,9 +9,11 @@ export const Navigation = () => {
 	return (
 		<GeneralDiv>
 			<DivForButton>
+
 				<LogoLink to="/">
 					<Logo src={logoA} alt="logo" />
 				</LogoLink>
+
 				<StyleDivForButton>
 					<StyledButton variant="text" size="small">
 						<StyledNavLink to="/">Главная/</StyledNavLink>
