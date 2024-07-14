@@ -36,7 +36,6 @@ const GeneralDiv = styled.div`
   background-color: ${theme.mainBackgroundColor};
   display: flex;
   align-items: center;
-  outline: black 1px solid;
 `;
 
 const DivForButton = styled.div`

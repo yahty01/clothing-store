@@ -27,6 +27,5 @@ const StyledMainDiv = styled.div`
 	display: flex;
 	flex-direction: column;
   min-height: 1082px;
-  outline: 1px solid red;
 	margin-bottom: 30px;
 `
