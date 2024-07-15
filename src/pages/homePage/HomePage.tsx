@@ -21,5 +21,5 @@ export const HomePage = ({products}: HomePageProps) => {
 };
 
 const StyledMainDiv = styled.div`
-	& > div {outline: orangered 1px solid;}
+	& > section {outline: orangered 1px solid;}
 `

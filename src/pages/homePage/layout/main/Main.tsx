@@ -8,10 +8,10 @@ type MainProps = {
 };
 export const Main = (props: MainProps) => {
 	return (
-		<StyledMainDiv>
+		<StyledMain>
 			<PhotoWrapper><p>Тут будет фотка</p></PhotoWrapper>
 			<StoreDescription/>
-		</StyledMainDiv>
+		</StyledMain>
 	);
 };
 
@@ -23,9 +23,8 @@ const PhotoWrapper = styled.div`
 	align-items: center;
 `
 
-const StyledMainDiv = styled.div`
+const StyledMain = styled.section`
 	display: flex;
 	flex-direction: column;
   min-height: 1082px;
-	margin-bottom: 30px;
 `

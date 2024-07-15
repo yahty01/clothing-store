@@ -3,11 +3,15 @@ import {Navigate, Route, Routes} from 'react-router-dom';
 import {Basket} from "./pages/basket/Basket";
 import {HomePage} from "./pages/homePage/HomePage";
 import {Navigation} from "./components/navigator/Navigator";
-import Photo from "./assets/images/cotalogMainPhoto.jpg"
+import jacket from "./assets/images/jacket.jpg"
+import corset from "./assets/images/corset.svg"
+import bigPhoto from "./assets/images/bigphoto.jpg"
+import dress from "./assets/images/dress.jpg"
+import {v1} from "uuid";
 
 
 export type ProductType = {
-	id: number;
+	id: string;
 	imageUrl: string;
 	title: string;
 };
@@ -15,10 +19,10 @@ export type ProductType = {
 export type ProductsType = ProductType[];
 
 const products: ProductsType = [
-	{id: 1, imageUrl: Photo, title: 'Item 1'},
-	{id: 2, imageUrl: Photo, title: 'Item 2'},
-	{id: 3, imageUrl: Photo, title: 'Item 3'},
-	{id: 4, imageUrl: Photo, title: 'Item 3'},
+	{id: v1(), imageUrl: jacket, title: 'Жакет →'},
+	{id: v1(), imageUrl: corset, title: 'Корсет White Swan →'},
+	{id: v1(), imageUrl: bigPhoto, title: 'Batist set'},
+	{id: v1(), imageUrl: dress, title: 'Платье Dream dress →'},
 ]
 
 function App() {
