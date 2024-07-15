@@ -4,17 +4,12 @@ import styled from 'styled-components';
 import { Main } from './layout/main/Main';
 import { Catalog } from './layout/catalog/Catalog';
 import { Footer } from '../../components/footer/Footer';
-import { ProductType } from '../../App';
 
-type HomePageProps = {
-	products: ProductType[]
-};
-
-export const HomePage = ({ products }: HomePageProps) => {
+export const HomePage = () => {
 	return (
 		<StyledMainDiv>
 			<Main />
-			<Catalog products={products} />
+			<Catalog />
 			<Footer />
 		</StyledMainDiv>
 	);

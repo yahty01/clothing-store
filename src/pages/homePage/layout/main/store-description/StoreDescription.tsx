@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import styled from "styled-components";
-import Photo from "../../../../../assets/images/cotalogMainPhoto.jpg"
+import Photo from "../../../../../assets/images/catalogmain_photo.jpg"
 import {theme} from "../../../../../styles/theme";
 
 type StoreDescriptionProps = {

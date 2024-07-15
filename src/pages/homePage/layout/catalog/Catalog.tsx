@@ -1,15 +1,31 @@
 // Catalog.tsx
 import * as React from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../../../../firebase';
 import { ProductType } from '../../../../App';
 
-type CatalogProps = {
-	products: ProductType[]
-};
+type CatalogProps = {};
 
-export const Catalog = ({ products }: CatalogProps) => {
+export const Catalog = ({}: CatalogProps) => {
+	const [products, setProducts] = useState<ProductType[]>([]);
 	const navigate = useNavigate();
+
+	useEffect(() => {
+		const fetchProducts = async () => {
+			const productsCollection = collection(db, 'products');
+			const productSnapshot = await getDocs(productsCollection);
+			const productList = productSnapshot.docs.map(doc => ({
+				id: doc.id,
+				...doc.data()
+			})) as ProductType[];
+			setProducts(productList);
+		};
+
+		fetchProducts();
+	}, []);
 
 	const handleCardClick = (id: string) => {
 		navigate(`/product/${id}`);
@@ -19,7 +35,7 @@ export const Catalog = ({ products }: CatalogProps) => {
 		<StyledCatalog>
 			{products.map(item => (
 				<Card key={item.id} onClick={() => handleCardClick(item.id)}>
-					<Image src={item.imageUrl} alt={item.title} />
+					<Image src={item.imgUrl} alt={item.title} />
 					<Title>{item.title} →</Title>
 				</Card>
 			))}
