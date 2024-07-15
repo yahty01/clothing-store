@@ -20,3 +20,4 @@ const StyledBasket = styled.div`
 	align-items: center;
 	font-size: 100px;
 `
+
