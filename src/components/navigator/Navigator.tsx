@@ -1,79 +1,87 @@
 import React from 'react';
 import styled from "styled-components";
-import { NavLink } from 'react-router-dom';
-import { Button } from "@mui/material";
-import { theme } from "../../styles/theme";
+import {NavLink, useNavigate} from 'react-router-dom';
+import {Button} from "@mui/material";
+import {theme} from "../../styles/theme";
 import logoA from '../../assets/images/logoA.svg';  // Импортируйте ваш SVG логотип
 
 export const Navigation = () => {
-	return (
-		<GeneralDiv>
-			<DivForButton>
+		const navigate = useNavigate();
 
-				<LogoLink to="/">
-					<Logo src={logoA} alt="logo" />
-				</LogoLink>
+		const handleNavigate = (path: string) => {
+			navigate(path);
+		};
 
-				<StyleDivForButton>
-					<StyledButton variant="text" size="small">
-						<StyledNavLink to="/">Главная/</StyledNavLink>
-					</StyledButton>
-				</StyleDivForButton>
 
-				<StyleDivForButton>
-					<StyledButton variant="text" size="small">
-						<StyledNavLink to="/Basket">Корзина/</StyledNavLink>
-					</StyledButton>
-				</StyleDivForButton>
-			</DivForButton>
-		</GeneralDiv>
-	);
-};
+		return (
+			<GeneralDiv>
+				<DivForButton>
 
-const GeneralDiv = styled.div`
-  height: 50px;
-  width: 100%;
-  background-color: ${theme.mainBackgroundColor};
-  display: flex;
-  align-items: center;
-`;
+					<LogoLink to="/">
+						<Logo src={logoA} alt="logo"/>
+					</LogoLink>
 
-const DivForButton = styled.div`
-  width: 92.135%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
+					<StyleDivForButton>
+						<StyledButton onClick={()=>handleNavigate('/')} variant="text" size="small">
+							<StyledNavLink to="/">Главная/</StyledNavLink>
+						</StyledButton>
+					</StyleDivForButton>
 
-const StyleDivForButton = styled.div`
-  padding: 0 5px;
-`;
+					<StyleDivForButton>
+						<StyledButton onClick={()=>handleNavigate('/Basket')} variant="text" size="small">
+							<StyledNavLink to="/Basket">Корзина/</StyledNavLink>
+						</StyledButton>
+					</StyleDivForButton>
+				</DivForButton>
+			</GeneralDiv>
+		);
+	};
 
-const StyledButton = styled(Button)`
-  && {
+	const GeneralDiv = styled.div`
+    height: 50px;
+    width: 100%;
     background-color: ${theme.mainBackgroundColor};
-    color: ${theme.mainTextColor};
-    border-radius: 8px;
-    padding: 8px 16px;
-    &:hover {
-	    background-color: transparent;
-      color: ${theme.secondaryTextColor};
-	    box-shadow: none;
+    display: flex;
+    align-items: center;
+	`;
+
+	const DivForButton = styled.div`
+    width: 92.135%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+	`;
+
+	const StyleDivForButton = styled.div`
+    padding: 0 5px;
+	`;
+
+	const StyledButton = styled(Button)`
+    && {
+      background-color: ${theme.mainBackgroundColor};
+      color: ${theme.mainTextColor};
+      border-radius: 8px;
+      padding: 8px 16px;
+
+      &:hover {
+        background-color: transparent;
+        color: ${theme.secondaryTextColor};
+        box-shadow: none;
+      }
     }
-  }
-`;
+	`;
 
-const LogoLink = styled(NavLink)`
-  margin-right: 16px;
-  margin-left: 70px;
-`;
+	const LogoLink = styled(NavLink)`
+    margin-right: 16px;
+    margin-left: 70px;
+	`;
 
-const Logo = styled.img`
-  width: 49px;  // Установите размер логотипа
-  height: 42px;
-`;
+	const Logo = styled.img`
+    width: 49px; // Установите размер логотипа
+    height: 42px;
+	`;
 
-const StyledNavLink = styled(NavLink)`
-  text-decoration: none;
-  color: inherit;
-`;
+	const StyledNavLink = styled(NavLink)`
+    text-decoration: none;
+    color: inherit;
+	`;
