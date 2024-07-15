@@ -9,9 +9,11 @@ export const Navigation = () => {
 	return (
 		<GeneralDiv>
 			<DivForButton>
+
 				<LogoLink to="/">
 					<Logo src={logoA} alt="logo" />
 				</LogoLink>
+
 				<StyleDivForButton>
 					<StyledButton variant="text" size="small">
 						<StyledNavLink to="/">Главная/</StyledNavLink>
@@ -34,7 +36,6 @@ const GeneralDiv = styled.div`
   background-color: ${theme.mainBackgroundColor};
   display: flex;
   align-items: center;
-  outline: black 1px solid;
 `;
 
 const DivForButton = styled.div`
