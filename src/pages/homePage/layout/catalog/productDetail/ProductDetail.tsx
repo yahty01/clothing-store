@@ -1,22 +1,36 @@
 import * as React from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useParams, useNavigate } from 'react-router-dom';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '../../../../../firebase';
 import { ProductType } from '../../../../../App';
 import { Button } from '@mui/material';
 import { theme } from '../../../../../styles/theme';
 import ImageGallery from 'react-image-gallery';
 import "react-image-gallery/styles/css/image-gallery.css";
-import {GlobalStyle} from "../../../../../styles/GlobalStyle";
+import { GlobalStyle } from '../../../../../styles/GlobalStyle';
 
-type ProductDetailProps = {
-	products: ProductType[];
-};
-
-const ProductDetail = ({ products }: ProductDetailProps) => {
+const ProductDetail = ({ products }: { products: ProductType[] }) => {
 	const { id } = useParams();
 	const navigate = useNavigate();
+	const [product, setProduct] = useState<ProductType | null>(null);
 
-	const product = products.find(p => p.id === id);
+	useEffect(() => {
+		const fetchProduct = async () => {
+			if (id) {
+				const productDoc = doc(db, 'products', id);
+				const productSnap = await getDoc(productDoc);
+				if (productSnap.exists()) {
+					setProduct(productSnap.data() as ProductType);
+				} else {
+					console.log('No such document!');
+				}
+			}
+		};
+
+		fetchProduct();
+	}, [id]);
 
 	const galleryRef = React.useRef<ImageGallery>(null);
 
@@ -26,16 +40,16 @@ const ProductDetail = ({ products }: ProductDetailProps) => {
 
 	const images = [
 		{
-			original: product.imageUrl,
-			thumbnail: product.imageUrl,
+			original: product.imgUrl,
+			thumbnail: product.imgUrl,
 		},
 		{
-			original: product.imageUrl,
-			thumbnail: product.imageUrl,
+			original: product.imgUrl,
+			thumbnail: product.imgUrl,
 		},
 		{
-			original: product.imageUrl,
-			thumbnail: product.imageUrl,
+			original: product.imgUrl,
+			thumbnail: product.imgUrl,
 		},
 	];
 
@@ -72,7 +86,8 @@ const ProductDetail = ({ products }: ProductDetailProps) => {
 			</StyledImageGalleryWrapper>
 			<Title>{product.title}</Title>
 			<Price>{product.price}₽</Price>
-			<Sizes>Доступные размеры: {product.size.join(', ')}</Sizes>
+			<Sizes>Доступные размеры: {product.size}</Sizes>
+			<Compound>Состав: {product.compound}</Compound>
 			<StyledButton>Добавить в корзину</StyledButton>
 		</StyledProductDetail>
 	);
@@ -101,6 +116,10 @@ const Price = styled.p`
 `;
 
 const Sizes = styled.p`
+  margin: 10px 0;
+`;
+
+const Compound = styled.p`
   margin: 10px 0;
 `;
 
