@@ -1,14 +1,14 @@
 // Catalog.tsx
 import * as React from 'react';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
-import { ProductType } from '../../../../App';
+import {useNavigate} from 'react-router-dom';
+import {ProductType} from "../../../../App";
 
 type CatalogProps = {
 	products: ProductType[]
 };
 
-export const Catalog = ({ products }: CatalogProps) => {
+export const Catalog = ({products}: CatalogProps) => {
 	const navigate = useNavigate();
 
 	const handleCardClick = (id: string) => {
@@ -19,7 +19,7 @@ export const Catalog = ({ products }: CatalogProps) => {
 		<StyledCatalog>
 			{products.map(item => (
 				<Card key={item.id} onClick={() => handleCardClick(item.id)}>
-					<Image src={item.imageUrl} alt={item.title} />
+					<Image src={item.imgUrl} alt={item.title}/>
 					<Title>{item.title} →</Title>
 				</Card>
 			))}
@@ -54,5 +54,6 @@ const Title = styled.h3`
   &:hover {
     cursor: pointer;
   }
+
   margin: 16px 0;
 `;

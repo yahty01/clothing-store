@@ -1,22 +1,21 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { useParams, useNavigate } from 'react-router-dom';
-import { ProductType } from '../../../../../App';
-import { Button } from '@mui/material';
-import { theme } from '../../../../../styles/theme';
+import {useParams, useNavigate} from 'react-router-dom';
+import {ProductType} from '../../../../../App';
+import {Button} from '@mui/material';
+import {theme} from '../../../../../styles/theme';
 import ImageGallery from 'react-image-gallery';
 import "react-image-gallery/styles/css/image-gallery.css";
-import {GlobalStyle} from "../../../../../styles/GlobalStyle";
+import {GlobalStyle} from '../../../../../styles/GlobalStyle';
 
 type ProductDetailProps = {
-	products: ProductType[];
-};
-
-const ProductDetail = ({ products }: ProductDetailProps) => {
-	const { id } = useParams();
+	products: ProductType[]
+}
+const ProductDetail = ({products}: ProductDetailProps) => {
+	const {id} = useParams<{ id: string }>();
+	const product = products.find((product) => product.id === id);
 	const navigate = useNavigate();
 
-	const product = products.find(p => p.id === id);
 
 	const galleryRef = React.useRef<ImageGallery>(null);
 
@@ -26,16 +25,16 @@ const ProductDetail = ({ products }: ProductDetailProps) => {
 
 	const images = [
 		{
-			original: product.imageUrl,
-			thumbnail: product.imageUrl,
+			original: product.imgUrl,
+			thumbnail: product.imgUrl,
 		},
 		{
-			original: product.imageUrl,
-			thumbnail: product.imageUrl,
+			original: product.imgUrl,
+			thumbnail: product.imgUrl,
 		},
 		{
-			original: product.imageUrl,
-			thumbnail: product.imageUrl,
+			original: product.imgUrl,
+			thumbnail: product.imgUrl,
 		},
 	];
 
@@ -55,7 +54,7 @@ const ProductDetail = ({ products }: ProductDetailProps) => {
 
 	return (
 		<StyledProductDetail>
-			<GlobalStyle />
+			<GlobalStyle/>
 			<StyledButton onClick={() => navigate(-1)}>Вернуться</StyledButton>
 			<StyledImageGalleryWrapper onClick={handleImageClick}>
 				<ImageGallery
@@ -72,7 +71,8 @@ const ProductDetail = ({ products }: ProductDetailProps) => {
 			</StyledImageGalleryWrapper>
 			<Title>{product.title}</Title>
 			<Price>{product.price}₽</Price>
-			<Sizes>Доступные размеры: {product.size.join(', ')}</Sizes>
+			<Sizes>Доступные размеры: {product.size}</Sizes>
+			<Compound>Состав: {product.compound}</Compound>
 			<StyledButton>Добавить в корзину</StyledButton>
 		</StyledProductDetail>
 	);
@@ -101,6 +101,10 @@ const Price = styled.p`
 `;
 
 const Sizes = styled.p`
+  margin: 10px 0;
+`;
+
+const Compound = styled.p`
   margin: 10px 0;
 `;
 
