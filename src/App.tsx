@@ -21,7 +21,6 @@ export type ProductType = {
 
 function App() {
 	const [products, setProducts] = useState<ProductType[]>([]);
-	const [basket, setBasket] = useState<ProductType[]>([]);
 
 	useEffect(() => {
 		const fetchProducts = async () => {
