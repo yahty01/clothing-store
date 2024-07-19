@@ -6,6 +6,8 @@ import {Navigation} from './components/navigator/Navigator';
 import {db} from './firebase';
 import {collection, getDocs} from 'firebase/firestore';
 import ProductDetail from "./pages/homePage/layout/catalog/productDetail/ProductDetail";
+import {PageNotFound} from "./components/404/PageNotFound";
+import {Footer} from "./components/footer/Footer";
 
 export type ProductType = {
 	id: string;
@@ -45,10 +47,11 @@ function App() {
 				<Route path="/product/:id"
 				       element={<ProductDetail products={products}/>}/>
 				<Route path="/404"
-				       element={<h1>404:PAGE NOT FOUND</h1>}/>
+				       element={<PageNotFound/>}/>
 				<Route path="*"
 				       element={<Navigate to="/404"/>}/>
 			</Routes>
+			<Footer/>
 		</div>
 	);
 }
