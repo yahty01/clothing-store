@@ -3,8 +3,8 @@ import styled from "styled-components";
 import { NavLink, useNavigate } from 'react-router-dom';
 import { Button } from "@mui/material";
 import { theme } from "../../styles/theme";
-import logoA from '../../assets/images/logoA.svg';  // Импортируйте ваш SVG логотип
-import { useBasket } from '../../components/BasketContext'; // Импортируйте хук для работы с корзиной
+import logoA from '../../assets/images/logoA.svg';
+import {useBasket} from "../BasketContext";
 
 export const Navigation = () => {
 	const navigate = useNavigate();
