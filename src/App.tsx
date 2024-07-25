@@ -23,19 +23,41 @@ export type ProductType = {
 function App() {
 	const [products, setProducts] = useState<ProductType[]>([]);
 
-	useEffect(() => {
-		const fetchProducts = async () => {
-			const productsCollection = collection(db, 'products');
-			const productSnapshot = await getDocs(productsCollection);
-			const productList = productSnapshot.docs.map(doc => ({
-				id: doc.id,
-				...doc.data()
-			})) as ProductType[];
-			setProducts(productList);
-		};
-
-		fetchProducts().catch(console.error);
+	useEffect(() => { // Данная Версия хука если в sessionStorage есть 'product', то берет данные от туда, а если нет то с fb
+		let getProducts = sessionStorage.getItem('products'); //
+		if (getProducts) {
+			setProducts(JSON.parse(getProducts))
+		} else {
+			const fetchProducts = async () => {
+				const productsCollection = collection(db, 'products');
+				const productSnapshot = await getDocs(productsCollection);
+				const productList = productSnapshot.docs.map(doc => ({
+					id: doc.id,
+					...doc.data()
+				})) as ProductType[];
+				setProducts(productList);
+			}
+			fetchProducts().catch(console.error);
+		}
 	}, []);
+
+	// useEffect(() => {
+	// 	const fetchProducts = async () => {
+	// 		const productsCollection = collection(db, 'products');
+	// 		const productSnapshot = await getDocs(productsCollection);
+	// 		const productList = productSnapshot.docs.map(doc => ({
+	// 			id: doc.id,
+	// 			...doc.data()
+	// 		})) as ProductType[];
+	// 		setProducts(productList);
+	// 	};
+	//
+	// 	fetchProducts().catch(console.error);
+	// }, []); Данную версию хука пока оставим
+
+	useEffect(() => {
+		sessionStorage.setItem('products', JSON.stringify(products));
+	}, );
 
 	return (
 		<BasketProvider>

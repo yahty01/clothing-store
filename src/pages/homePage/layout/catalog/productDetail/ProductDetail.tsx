@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import styled from 'styled-components';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ProductType } from '../../../../../App';
@@ -19,7 +19,7 @@ const ProductDetail = ({ products }: ProductDetailProps) => {
 	const navigate = useNavigate();
 	const { addToBasket } = useBasket(); // Получаем функцию добавления в корзину
 
-	const galleryRef = React.useRef<ImageGallery>(null);
+	const galleryRef = useRef<ImageGallery>(null);
 
 	if (!product) {
 		return <div>Product not found</div>;

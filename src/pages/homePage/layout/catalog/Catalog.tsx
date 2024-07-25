@@ -32,8 +32,8 @@ const StyledCatalog = styled.section`
   display: flex;
   flex-wrap: wrap;
   gap: 109px;
-  padding-left: 28.75%;
-  padding-right: 21.6%;
+  margin-left: 21.75%;
+  max-width: calc(844px + 109px);
 `;
 
 const Card = styled.div`

@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, {createContext, useContext, useState, ReactNode, useEffect} from 'react';
 import { ProductType } from "../App";
 
 type BasketContextType = {
@@ -23,6 +23,18 @@ type BasketProviderProps = {
 
 export const BasketProvider = ({ children }: BasketProviderProps) => {
 	const [basket, setBasket] = useState<ProductType[]>([]);
+
+	useEffect(() => {
+		let getBasket = sessionStorage.getItem('basket'); //
+		if (getBasket) {
+			setBasket(JSON.parse(getBasket))
+		}
+	}, []);
+
+
+	useEffect(() => {
+		sessionStorage.setItem('basket', JSON.stringify(basket));
+	}, [basket]);
 
 	const addToBasket = (product: ProductType) => {
 		setBasket((prevBasket) => [...prevBasket, product]);
