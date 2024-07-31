@@ -61,9 +61,4 @@ export const GlobalStyle = createGlobalStyle`
   .image-gallery-icon:hover {
     color: ${theme.secondaryTextColor}; /* Устанавливает цвет навигационных стрелок при наведении */
   }
-  
-  //button {
-  //  background-color: unset;
-  //  border: none;
-  //}
 `
