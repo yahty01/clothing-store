@@ -4,26 +4,61 @@ import { theme } from '../../styles/theme';
 import { Button } from '@mui/material';
 import { useForm } from "react-hook-form";
 import { useLocation } from 'react-router-dom';
-import {ProductType} from "../../App";
+import { ProductType } from "../../App";
 
-type OrderFormProps = {};
+interface OrderFormProps {}
 
-const OrderForm = (props: OrderFormProps) => {
-	const { register, handleSubmit, formState: { errors } } = useForm();
+interface FormData {
+	lastName: string;
+	firstName: string;
+	middleName?: string;
+	city: string;
+	sdekAddress: string;
+	phoneNumber: string;
+	comment?: string;
+}
+
+const OrderForm: React.FC<OrderFormProps> = () => {
+	const { register, handleSubmit, formState: { errors } } = useForm<FormData>();
 	const location = useLocation();
 	const { products, total } = location.state as {
 		products: (ProductType & { quantity: number })[];
 		total: number;
 	};
 
-	const onSubmit = (data: any) => {
+	const onSubmit = async (data: FormData) => {
 		const orderData = {
 			...data,
 			products,
 			total
 		};
-		console.log(orderData);
-		// Здесь обрабатывать данные формы, например, отправить их на сервер
+
+		try {
+			const response = await fetch('https://vyacheslavna.ru/process_payment.php', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(orderData)
+			});
+
+			if (!response.ok) {
+				const errorText = await response.text();
+				console.error('Error creating payment:', errorText);
+				throw new Error(`Error creating payment: ${response.status}`);
+			}
+
+			const result = await response.json();
+			console.log('Received data from server:', result);
+
+			if (result.payment && result.payment.confirmation && result.payment.confirmation.confirmation_url) {
+				window.location.href = result.payment.confirmation.confirmation_url;
+			} else {
+				console.error('Error creating payment', result);
+			}
+		} catch (error) {
+			console.error('Error submitting form:', error);
+		}
 	};
 
 	return (
@@ -40,7 +75,7 @@ const OrderForm = (props: OrderFormProps) => {
 			</Field>
 			<Field>
 				<label>Отчество</label>
-				<input {...register("middleName", { required: false })} />
+				<input {...register("middleName")} />
 			</Field>
 			<Field>
 				<label>Город</label>
@@ -59,7 +94,7 @@ const OrderForm = (props: OrderFormProps) => {
 			</Field>
 			<Field>
 				<label>Комментарий к заказу</label>
-				<textarea {...register("comment", { required: false })} />
+				<textarea {...register("comment")} />
 			</Field>
 			<StyledButton type="submit">Оплатить</StyledButton>
 		</StyledForm>
@@ -106,8 +141,6 @@ const StyledButton = styled(Button)`
 
     &:hover {
       background-color: transparent;
-      color: ${theme.secondaryTextColor};
-      box-shadow: none;
     }
   }
 `;
