@@ -23,6 +23,12 @@ export const Navigation = () => {
 				</LogoLink>
 
 				<StyleDivForButton>
+					<StyledButton onClick={() => handleNavigate('/order/payment')} variant="text" size="small">
+						<StyledNavLink to="/">Статус оплаты/</StyledNavLink>
+					</StyledButton>
+				</StyleDivForButton>
+
+				<StyleDivForButton>
 					<StyledButton onClick={() => handleNavigate('/')} variant="text" size="small">
 						<StyledNavLink to="/">Главная/</StyledNavLink>
 					</StyledButton>

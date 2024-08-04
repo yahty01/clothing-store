@@ -10,6 +10,7 @@ import { PageNotFound } from "./components/404/PageNotFound";
 import { Footer } from "./components/footer/Footer";
 import { BasketProvider } from './components/BasketContext';
 import OrderForm from "./pages/basket/OrderForm";
+import PaymentStatus from "./pages/PaymentStatus";
 
 export type ProductType = {
 	id: string;
@@ -70,6 +71,7 @@ function App() {
 					<Route path="/product/:id" element={<ProductDetail products={products} />} />
 					<Route path="/404" element={<PageNotFound />} />
 					<Route path="*" element={<Navigate to="/404" />} />
+					<Route path="/order/payment" element={<PaymentStatus />} />
 				</Routes>
 				<Footer />
 			</div>
