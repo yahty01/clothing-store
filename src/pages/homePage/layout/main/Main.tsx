@@ -14,18 +14,34 @@ export const Main = () => {
 };
 
 const PhotoWrapper = styled.div`
-  height: 530px;
-	width: 100%;
+  position: relative;
+
+  &::before {
+	  font-family: "NEXT ART",'Fira Mono', monospace;
+    position: absolute;
+    top: 31px;
+    right: 12%;
+	  color: #ffffff;
+    content: 'Ss’24 white swan';
+    font-weight: bold;
+    max-width: 136px;
+    max-height: 89px;
+    font-size: 2rem;
+	  z-index: 2;
+  }
+
+  max-height: 530px;
+  width: 100%;
   background-color: rgba(0, 0, 0, 0.16);
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	
-	img {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-	}
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 `
 
 const StyledMain = styled.section`

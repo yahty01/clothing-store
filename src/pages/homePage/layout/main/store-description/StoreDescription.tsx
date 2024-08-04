@@ -3,30 +3,43 @@ import * as React from 'react';
 import styled from "styled-components";
 import Photo from "../../../../../assets/images/catalogmain_photo.jpg"
 import {theme} from "../../../../../styles/theme";
+import Grid from '@mui/material/Unstable_Grid2';
+
 
 type StoreDescriptionProps = {
 
 };
 export const StoreDescription = (props: StoreDescriptionProps) => {
 	return (
-		<StyledMainDiv>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A consequuntur delectus, ducimus enim esse incidunt, ipsum labore laborum libero necessitatibus perferendis ratione reiciendis repellat reprehenderit, saepe sed tenetur ut voluptatibus.</p>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A accusantium at debitis doloribus eos impedit ipsum laboriosam modi nam nobis provident quaerat quis quos saepe soluta, ullam unde vero voluptates?</p>
-			<div>
-				<a href="#">К каталогу →</a>
-				<img src={Photo} alt="#"/>
-			</div>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab culpa doloremque eveniet facilis impedit minima nemo perferendis soluta unde veritatis. Aperiam autem eaque maiores minima molestias. Beatae magnam nostrum rerum.</p>
+		<StyledMainDiv container spacing={0}>
+			<Grid  xs={12} sm={6} md={4} lg={3} xl={2}>
+				<p>VYACHESLÁVNA начинает свое путешествие, вкладывая в каждый шов и каждый паттерн бесценные частицы творчества</p>
+			</Grid>
+			<Grid  xs={12} sm={6} md={4} lg={3} xl={2}>
+				<p>как распускающийся бутон редкого цветка, медленно и уверенно раскрывающий свое великолепие</p>
+			</Grid>
+			<Grid  xs={12} sm={6} md={4} lg={3} xl={2}>
+				<div>
+					<a href="#">К каталогу →</a>
+					<img src={Photo} alt="#"/>
+				</div>			</Grid>
+			<Grid  xs={12} sm={6} md={4} lg={3} xl={2}>
+				<p>Каждое изделие — воплощение женственности, капля изысканности, которую можно почувствовать, дотронувшись до
+					ткани</p>
+			</Grid>
 		</StyledMainDiv>
 	);
 };
 
-const StyledMainDiv = styled.div`
+const StyledMainDiv = styled(Grid)`
 	display: flex;
 	font-size: 12px;
 	justify-content: space-around;
   align-items: center;
-	p {
+  font-family: 'NEXT ART', sans-serif !important;
+  font-weight: 600;
+  font-style: normal;
+  p {
 		width: 108px;
 	}
 	div {

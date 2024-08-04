@@ -6,9 +6,7 @@ export const GlobalStyle = createGlobalStyle`
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: "Fira Mono", monospace;
     font-optical-sizing: auto;
-    font-weight: 500;
     font-style: normal;
     line-height: 1.2;
   }
@@ -16,7 +14,6 @@ export const GlobalStyle = createGlobalStyle`
   body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-family:"Fira Mono", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     line-height: 1.5;
     -webkit-text-size-adjust: 100%;
     tab-size: 4;

@@ -63,6 +63,7 @@ function App() {
 	return (
 		<BasketProvider>
 			<div className="App">
+
 				<Navigation />
 				<Routes>
 					<Route path="/" element={<HomePage products={products} />} />

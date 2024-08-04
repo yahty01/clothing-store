@@ -90,6 +90,7 @@ const Logo = styled.img`
 `;
 
 const StyledNavLink = styled(NavLink)`
+  font-family: "Fira Mono", monospace;
   text-decoration: none;
   color: inherit;
 `;
