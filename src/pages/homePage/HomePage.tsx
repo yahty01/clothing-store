@@ -11,15 +11,9 @@ type HomePageProps = {
 
 export const HomePage = ({products}: HomePageProps) => {
 	return (
-		<StyledMainDiv>
+		<div>
 			<Main/>
 			<Catalog products={products}/>
-		</StyledMainDiv>
+		</div>
 	);
 };
-
-const StyledMainDiv = styled.div`
-  & > section {
-    outline: orangered 1px solid;
-  }
-`;

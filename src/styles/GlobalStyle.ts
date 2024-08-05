@@ -8,7 +8,6 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     font-optical-sizing: auto;
     font-style: normal;
-    line-height: 1.2;
   }
 
   body {
