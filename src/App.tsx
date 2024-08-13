@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import { Basket } from './pages/basket/Basket';
 import { HomePage } from './pages/homePage/HomePage';
 import { Navigation } from './components/navigator/Navigator';
-import { db } from './firebase';
-import { collection, getDocs } from 'firebase/firestore';
 import ProductDetail from "./pages/homePage/layout/catalog/productDetail/ProductDetail";
 import { PageNotFound } from "./components/404/PageNotFound";
 import { Footer } from "./components/footer/Footer";
@@ -17,62 +15,52 @@ export type ProductType = {
 	imgUrl: string;
 	title: string;
 	price: number;
-	size: string;
+	size: string[];
 	compound: string;
 };
 
 function App() {
 	const [products, setProducts] = useState<ProductType[]>([]);
-
-	useEffect(() => { // Данная Версия хука если в sessionStorage есть 'product', то берет данные от туда, а если нет то с fb
-		let getProducts = sessionStorage.getItem('products'); //
-		if (getProducts) {
-			setProducts(JSON.parse(getProducts))
-		} else {
-			const fetchProducts = async () => {
-				const productsCollection = collection(db, 'products');
-				const productSnapshot = await getDocs(productsCollection);
-				const productList = productSnapshot.docs.map(doc => ({
-					id: doc.id,
-					...doc.data()
-				})) as ProductType[];
-				setProducts(productList);
-			}
-			fetchProducts().catch(console.error);
-		}
-	}, []);
-
-	// useEffect(() => {
-	// 	const fetchProducts = async () => {
-	// 		const productsCollection = collection(db, 'products');
-	// 		const productSnapshot = await getDocs(productsCollection);
-	// 		const productList = productSnapshot.docs.map(doc => ({
-	// 			id: doc.id,
-	// 			...doc.data()
-	// 		})) as ProductType[];
-	// 		setProducts(productList);
-	// 	};
-	//
-	// 	fetchProducts().catch(console.error);
-	// }, []); Данную версию хука пока оставим
+	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState('');
 
 	useEffect(() => {
-		sessionStorage.setItem('products', JSON.stringify(products));
-	}, );
+		async function fetchProducts() {
+			try {
+				const response = await fetch('https://vyacheslavna.ru/products.php');
+				if (!response.ok) {
+					throw new Error(`HTTP error! status: ${response.status}`);
+				}
+				const data = await response.json();
+				setProducts(data);
+				setLoading(false);
+			} catch (e) {
+				if (e instanceof Error) {
+					setError(e.message);
+				} else {
+					setError('An unexpected error occurred');
+				}
+				setLoading(false);
+			}
+		}
+		fetchProducts();
+	}, []);
+
+	if (loading) return <p>Loading...</p>;
+	if (error) return <p>Error loading products: {error}</p>;
 
 	return (
 		<BasketProvider>
 			<div className="App">
-
 				<Navigation />
 				<Routes>
 					<Route path="/" element={<HomePage products={products} />} />
-					<Route path="/Basket" element={<Basket />} />
-					<Route path="/order" element={<OrderForm />} /> {/* Новый маршрут */}
+					<Route path="/basket" element={<Basket />} />
+					<Route path="/order" element={<OrderForm />} />
 					<Route path="/product/:id" element={<ProductDetail products={products} />} />
+					<Route path="/order/payment-status" element={<PaymentStatus />} />
 					<Route path="/404" element={<PageNotFound />} />
 					<Route path="*" element={<Navigate to="/404" />} />
-					<Route path="/order/payment" element={<PaymentStatus />} />
 				</Routes>
 				<Footer />
 			</div>
