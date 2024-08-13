@@ -28,16 +28,10 @@ export const Navigation = () => {
 					</StyledButton>
 				</StyleDivForButton>
 
-				<StyleDivForButton>
-					<StyledButton onClick={() => handleNavigate('/')} variant="text" size="small">
-						<StyledNavLink to="/">Главная/</StyledNavLink>
-					</StyledButton>
-				</StyleDivForButton>
-
-				<StyleDivForButton>
+				<StyleDivForButton style={{padding: '30px'}}>
 					<StyledButton onClick={() => handleNavigate('/Basket')} variant="text" size="small">
 						<StyledNavLink to="/Basket">Корзина/</StyledNavLink>
-						<BasketCount>{basket.length}</BasketCount> {/* Отображаем количество товаров */}
+						{basket.length !== 0 ? <BasketCount>{basket.length}</BasketCount> : ''} {/* Отображаем количество товаров */}
 					</StyledButton>
 				</StyleDivForButton>
 			</DivForButton>
@@ -46,7 +40,7 @@ export const Navigation = () => {
 };
 
 const GeneralDiv = styled.div`
-  height: 50px;
+  height: 81px;
   width: 100%;
   background-color: ${theme.mainBackgroundColor};
   display: flex;
@@ -54,7 +48,7 @@ const GeneralDiv = styled.div`
 `;
 
 const DivForButton = styled.div`
-  width: 92.135%;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;

@@ -19,8 +19,9 @@ const PhotoWrapper = styled.div`
   &::before {
 	  font-family: "NEXT ART",'Fira Mono', monospace;
     position: absolute;
-    top: 31px;
-    right: 12%;
+	  line-height: 96%;
+    top: 29px;
+    right: 14%;
 	  color: #ffffff;
     content: 'Ss’24 white swan';
     font-weight: bold;
