@@ -29,7 +29,10 @@ export const Footer = (props: Props) => {
 };
 
 const StyledFooter = styled.footer`
-	padding-top: 92px;
+  font-family: 'NEXT ART', sans-serif !important;
+  font-weight: 500;
+  line-height: 1.5;
+  padding-top: 92px;
 	padding-bottom: 38px;
   min-height: 153px;
 	display: flex;

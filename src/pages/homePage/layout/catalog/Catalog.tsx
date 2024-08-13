@@ -51,6 +51,8 @@ const Image = styled.img`
 `;
 
 const Title = styled.h3`
+  font-family: "Fira Mono", monospace;
+  font-weight: 500;
   &:hover {
     cursor: pointer;
   }

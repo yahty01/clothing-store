@@ -66,6 +66,12 @@ export const Basket = (props: Props) => {
 };
 
 const StyledBasket = styled.div`
+  font-family: 'NEXT ART', sans-serif !important;
+  font-weight: 500;
+  line-height: 1.5;
+  button{
+    font-family: "Fira Code", monospace;
+  }
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -139,6 +145,7 @@ const SummaryDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: "Fira Code", monospace;
 `;
 
 export default Basket;

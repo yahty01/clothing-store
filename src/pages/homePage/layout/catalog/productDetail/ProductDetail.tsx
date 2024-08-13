@@ -60,7 +60,6 @@ const ProductDetail = ({ products }: ProductDetailProps) => {
 
 	return (
 		<StyledProductDetail>
-			<GlobalStyle />
 			<StyledButton onClick={() => navigate(-1)}>Вернуться</StyledButton>
 			<StyledImageGalleryWrapper onClick={handleImageClick}>
 				<ImageGallery
@@ -85,10 +84,16 @@ const ProductDetail = ({ products }: ProductDetailProps) => {
 };
 
 const StyledProductDetail = styled.div`
+  font-family: 'NEXT ART', sans-serif !important;
+  font-weight: 500;
+  line-height: 1.5;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
+	button{
+		font-family: "Fira Code", monospace;
+	}
 `;
 
 const StyledImageGalleryWrapper = styled.div`
@@ -99,6 +104,7 @@ const StyledImageGalleryWrapper = styled.div`
 
 const Title = styled.h2`
   margin: 20px 0;
+	font-weight: semi-bold;
 `;
 
 const Price = styled.p`

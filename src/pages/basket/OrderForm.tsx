@@ -102,10 +102,17 @@ const OrderForm: React.FC<OrderFormProps> = () => {
 };
 
 const StyledForm = styled.form`
+  font-family: 'NEXT ART', sans-serif !important;
+  font-weight: 500;
+  line-height: 1.5;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
+	button {
+    font-family: "Fira Code", monospace;
+
+  }
 `;
 
 const Field = styled.div`

@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import Box from '@mui/material/Box';
+import styled from "styled-components";
 
 
 const PaymentStatus = () => {
@@ -24,6 +25,7 @@ const PaymentStatus = () => {
 
 	return (
 	<Box component="section" sx={{ p: 2, display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center', height: '70vh' }}>
+		<StyledDiv>
 			<h1>Статус оплаты</h1>
 			{paymentStatus === null ? (
 				<p>Ожидание оплаты...</p>
@@ -32,8 +34,19 @@ const PaymentStatus = () => {
 			) : (
 				<p style={{ color: 'red' }}>Оплата не удалась.</p>
 			)}
+		</StyledDiv>
+
 	</Box>
 	);
 };
 
 export default PaymentStatus;
+
+const StyledDiv = styled.div`
+	h1 {
+    font-family: "Fira Mono", monospace;
+    font-weight: 300;
+  }
+  font-family: "Fira Mono", monospace;
+  font-weight: 300;
+`
