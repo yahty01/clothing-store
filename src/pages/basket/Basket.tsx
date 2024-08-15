@@ -5,6 +5,7 @@ import { Button } from '@mui/material';
 import { useBasket } from "../../components/BasketContext";
 import { useNavigate } from 'react-router-dom';
 import {ProductType} from "../../App";
+import BackButton from "../../components/BackButton";
 
 type Props = {};
 
@@ -36,6 +37,7 @@ export const Basket = (props: Props) => {
 
 	return (
 		<StyledBasket>
+			<BackButton/>
 			<div>Корзина</div>
 			{basket.length === 0 ? (
 				<EmptyBasket>Ваша корзина пуста</EmptyBasket>
@@ -59,7 +61,7 @@ export const Basket = (props: Props) => {
 			)}
 			<SummaryDiv>
 				<span>Всего: {totalBasket}₽</span>
-				<StyledButton onClick={handleOrderClick}>Оформить заказ</StyledButton>
+				<StyledButton sx={{textTransform: 'none'}} onClick={handleOrderClick}>Оформить заказ</StyledButton>
 			</SummaryDiv>
 		</StyledBasket>
 	);
@@ -70,7 +72,7 @@ const StyledBasket = styled.div`
   font-weight: 500;
   line-height: 1.5;
   button{
-    font-family: "Fira Code", monospace;
+    font-family: "Fira Mono", monospace;
   }
   height: 100vh;
   display: flex;

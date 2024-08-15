@@ -23,13 +23,13 @@ export const Navigation = () => {
 				</LogoLink>
 
 				<StyleDivForButton>
-					<StyledButton onClick={() => handleNavigate('/order/payment')} variant="text" size="small">
+					<StyledButton sx={{textTransform: 'none'}} onClick={() => handleNavigate('/order/payment')} variant="text" size="small">
 						<StyledNavLink to="/">Статус оплаты/</StyledNavLink>
 					</StyledButton>
 				</StyleDivForButton>
 
 				<StyleDivForButton style={{padding: '30px'}}>
-					<StyledButton onClick={() => handleNavigate('/Basket')} variant="text" size="small">
+					<StyledButton sx={{textTransform: 'none'}} onClick={() => handleNavigate('/Basket')} variant="text" size="small">
 						<StyledNavLink to="/Basket">Корзина/</StyledNavLink>
 						{basket.length !== 0 ? <BasketCount>{basket.length}</BasketCount> : ''} {/* Отображаем количество товаров */}
 					</StyledButton>

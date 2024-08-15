@@ -17,7 +17,7 @@ const PhotoWrapper = styled.div`
   position: relative;
 
   &::before {
-	  font-family: "NEXT ART",'Fira Mono', monospace;
+	  font-family: "NEXT ART", monospace;
     position: absolute;
 	  line-height: 96%;
     top: 29px;
