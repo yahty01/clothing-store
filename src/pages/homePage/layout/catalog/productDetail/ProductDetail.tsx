@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {useEffect, useRef} from 'react';
 import styled from 'styled-components';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ProductType } from '../../../../../App';
@@ -6,8 +6,9 @@ import { Button } from '@mui/material';
 import { theme } from '../../../../../styles/theme';
 import ImageGallery from 'react-image-gallery';
 import 'react-image-gallery/styles/css/image-gallery.css';
-import { GlobalStyle } from '../../../../../styles/GlobalStyle';
 import {useBasket} from "../../../../../components/BasketContext";
+import Grid from "@mui/material/Unstable_Grid2";
+import BackButton from "../../../../../components/BackButton";
 
 type ProductDetailProps = {
 	products: ProductType[];
@@ -20,6 +21,10 @@ const ProductDetail = ({ products }: ProductDetailProps) => {
 	const { addToBasket } = useBasket(); // Получаем функцию добавления в корзину
 
 	const galleryRef = useRef<ImageGallery>(null);
+
+	useEffect(() => {
+		window.scrollTo(0, 0); // Прокрутка страницы вверх при монтировании компонента
+	}, []);
 
 	if (!product) {
 		return <div>Product not found</div>;
@@ -60,25 +65,33 @@ const ProductDetail = ({ products }: ProductDetailProps) => {
 
 	return (
 		<StyledProductDetail>
-			<StyledButton onClick={() => navigate(-1)}>Вернуться</StyledButton>
-			<StyledImageGalleryWrapper onClick={handleImageClick}>
-				<ImageGallery
-					ref={galleryRef}
-					items={images}
-					showPlayButton={false}
-					showFullscreenButton={false}
-					showNav={false}
-					showThumbnails={true}
-					infinite={true}
-					autoPlay={false}
-					slideDuration={550}
-				/>
-			</StyledImageGalleryWrapper>
-			<Title>{product.title}</Title>
-			<Price>{product.price}₽</Price>
-			<Sizes>Доступные размеры: {product.size}</Sizes>
-			<Compound>Состав: {product.compound}</Compound>
-			<StyledButton onClick={handleAddToBasket}>Добавить в корзину</StyledButton>
+			<BackButton/>
+			<Grid container spacing={2}>
+				<Grid>
+					<StyledImageGalleryWrapper onClick={handleImageClick}>
+						<ImageGallery
+							ref={galleryRef}
+							items={images}
+							showPlayButton={false}
+							showFullscreenButton={false}
+							showNav={false}
+							showThumbnails={true}
+							infinite={true}
+							autoPlay={false}
+							slideDuration={550}
+							additionalClass="custom-gallery"
+						/>
+					</StyledImageGalleryWrapper>
+				</Grid>
+
+				<Grid>
+					<Title>{product.title}</Title>
+					<Price>{product.price}₽</Price>
+					<Sizes>Доступные размеры: {product.size}</Sizes>
+					<Compound>Состав: {product.compound}</Compound>
+					<StyledButton sx={{textTransform: 'none'}} onClick={handleAddToBasket}>Добавить в корзину</StyledButton>
+				</Grid>
+			</Grid>
 		</StyledProductDetail>
 	);
 };

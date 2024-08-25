@@ -9,7 +9,7 @@ export const GlobalStyle = createGlobalStyle`
     font-optical-sizing: auto;
     font-style: normal;
   }
-
+  
   body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -19,11 +19,6 @@ export const GlobalStyle = createGlobalStyle`
     font-feature-settings: normal;
     background-color: ${theme.mainBackgroundColor};
     color: ${theme.mainTextColor};
-
-    //& > div > div {
-    //  display: flex;
-    //  gap: 10px;
-    //}
   }
 
   a {
@@ -32,6 +27,10 @@ export const GlobalStyle = createGlobalStyle`
 
   ul {
     list-style: none;
+  }
+  
+  button {
+    font-family: "Fira Mono", monospace;
   }
 
   .image-gallery {
@@ -56,5 +55,10 @@ export const GlobalStyle = createGlobalStyle`
 
   .image-gallery-icon:hover {
     color: ${theme.secondaryTextColor}; /* Устанавливает цвет навигационных стрелок при наведении */
+  }
+  .custom-gallery .image-gallery-slide img {
+    height: 400px; /* Установите желаемую высоту */
+    width: 100%;
+    object-fit: contain;
   }
 `
