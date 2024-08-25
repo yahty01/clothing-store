@@ -58,7 +58,7 @@ function App() {
 					<Route path="/basket" element={<Basket />} />
 					<Route path="/order" element={<OrderForm />} />
 					<Route path="/product/:id" element={<ProductDetail products={products} />} />
-					<Route path="/order/payment-status" element={<PaymentStatus />} />
+					<Route path="/order/payment-status/:orderId" element={<PaymentStatus />} />
 					<Route path="/404" element={<PageNotFound />} />
 					<Route path="*" element={<Navigate to="/404" />} />
 				</Routes>

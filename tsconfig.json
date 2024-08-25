@@ -9,5 +9,5 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["src"]
+  "include": ["src", "server.js"]
 }
