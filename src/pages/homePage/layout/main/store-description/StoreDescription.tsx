@@ -6,62 +6,98 @@ import {theme} from "../../../../../styles/theme";
 import Grid from '@mui/material/Unstable_Grid2';
 
 
-type StoreDescriptionProps = {
-
-};
+type StoreDescriptionProps = {};
 export const StoreDescription = (props: StoreDescriptionProps) => {
 	return (
 		<StyledMainDiv>
-			<StyledMainGrid container spacing={0} flexDirection={'row'} justifyContent={'space-between'}>
-				<Grid  xs={12} sm={6} md={4} lg={3} xl={2} alignSelf={'flex-start'}>
-					<p>VYACHESLÁVNA начинает свое путешествие, вкладывая в каждый шов и каждый паттерн бесценные частицы творчества</p>
-				</Grid>
-				<Grid  xs={12} sm={6} md={4} lg={3} xl={2} alignSelf={'flex-end'}>
-					<p>как распускающийся бутон редкого цветка, медленно и уверенно раскрывающий свое великолепие</p>
-				</Grid>
-				<Grid  xs={12} sm={6} md={4} lg={3} xl={2} alignSelf={'center'}>
+			<StyledMainGrid>
+
+				<FirstBigDiv>
+					<div style={{alignItems: "flex-start"}}>
+						<p> VYACHESLÁVNA начинает свое путешествие, вкладывая в каждый шов и каждый паттерн бесценные
+							частицы творчества</p>
+					</div>
 					<div>
-						<a href="#">К каталогу →</a>
-						<img src={Photo} alt="#"/>
-					</div>			</Grid>
-				<Grid  xs={12} sm={6} md={4} lg={3} xl={2} alignSelf={'center'}>
-					<p >Каждое изделие — воплощение женственности, капля изысканности, которую можно почувствовать, дотронувшись до
-						ткани</p>
-				</Grid>
+						<p>как распускающийся бутон редкого цветка, медленно и уверенно раскрывающий свое великолепие</p>
+					</div>
+				</FirstBigDiv>
+
+				<SecondBigDiv>
+					<div>
+						<PhotoDescription>
+							<a href="#">К каталогу →</a>
+							<img src={Photo} alt="#"/>
+						</PhotoDescription></div>
+					<div>
+						<p>Каждое изделие — воплощение женственности, капля изысканности, которую можно почувствовать, дотронувшись
+							до
+							ткани</p>
+					</div>
+
+				</SecondBigDiv>
 			</StyledMainGrid>
 		</StyledMainDiv>
+
 	);
 };
 
-const StyledMainGrid = styled(Grid)`
-	display: flex;
-	font-size: 12px;
-	justify-content: space-around;
+const StyledMainDiv = styled.div`
+  outline: 1px red solid;
+  margin-top: 57px;
+  margin-left: calc(314% / (1920 / 100));
+  margin-right: calc(195% / (1920 / 100));
+  min-height: calc(1082px - 529px - 57px);
+`
+
+const StyledMainGrid = styled.div`
+  outline: 1px solid red;
+  display: flex;
+  font-size: 12px;
+  justify-content: space-between;
   align-items: center;
   font-family: 'NEXT ART', sans-serif !important;
   font-weight: 600;
-	line-height: 1.5;
-  letter-spacing: 0.15em; 
+  line-height: 1.5;
+  letter-spacing: 0.15em;
   font-style: normal;
-  min-height: calc(1082px - 529px - 57px - 51px);
+  min-height: calc(1082px - 529px - 57px);
+
   p {
-		width: 208px;
-	}
-	div {
-		a {
-			color: ${theme.mainTextColor};
+    width: 208px;
+  }
+
+  div {
+    a {
+      color: ${theme.mainTextColor};
       border-bottom: ${theme.secondaryTextColor} 0.5px solid;
     }
-		img{
-			margin-top: 34px;
-		}
-	}
-	flex-grow: 1;
+
+    img {
+      margin-top: 34px;
+    }
+  }
+
+  flex-grow: 1;
 `
 
-const StyledMainDiv = styled.div`
-	margin-top: 57px;
-	margin-left: calc(314% / (1920/100));
-	margin-right: calc(195% / (1920/100));
-	min-height: calc(1082px - 529px - 57px);
+const PhotoDescription = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  outline: 1px red solid;
 `
+
+const FirstBigDiv = styled.div`
+	div {
+		outline: 1px red solid;
+	}
+	height: 100%;	
+	display: flex;
+	justify-content: space-between;
+	
+`
+const SecondBigDiv = styled.div`
+	display: flex;
+	
+`
+

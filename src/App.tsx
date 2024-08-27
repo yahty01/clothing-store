@@ -9,6 +9,7 @@ import { Footer } from "./components/footer/Footer";
 import { BasketProvider } from './components/BasketContext';
 import OrderForm from "./pages/basket/OrderForm";
 import PaymentStatus from "./pages/PaymentStatus";
+import styled from "styled-components";
 
 export type ProductType = {
 	id: string;
@@ -51,7 +52,7 @@ function App() {
 
 	return (
 		<BasketProvider>
-			<div className="App">
+			<StyledApp className="App">
 				<Navigation />
 				<Routes>
 					<Route path="/" element={<HomePage products={products} />} />
@@ -63,9 +64,15 @@ function App() {
 					<Route path="*" element={<Navigate to="/404" />} />
 				</Routes>
 				<Footer />
-			</div>
+			</StyledApp>
 		</BasketProvider>
 	);
 }
 
 export default App;
+
+const StyledApp = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 20px);
+`
