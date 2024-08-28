@@ -10,8 +10,7 @@ export const PageNotFound = () => {
 };
 
 const StyledPageNotFound = styled.div`
-  width: 100%;
-  height: 78.1vh;
+	flex-grow: 1;
 	display: flex;
 	justify-content: center;
 	align-items: center;
