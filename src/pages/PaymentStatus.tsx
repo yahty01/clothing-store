@@ -7,15 +7,14 @@ import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import styled from 'styled-components';
 
 interface RouteParams {
-  [key: string]: string | undefined; // Correct typing for useParams
+  [key: string]: string | undefined;
 }
 
 const PaymentStatus = () => {
     const [paymentStatus, setPaymentStatus] = useState<'pending' | 'succeeded' | 'failed' | 'error'>('pending');
-    const { orderId } = useParams<RouteParams>(); // Correctly typed useParams
+    const { orderId } = useParams<RouteParams>();
 
     const pollPaymentStatus = useCallback((orderId: string) => {
-        console.log('Starting polling for payment status with order_id:', orderId);
         axios.get(`https://vyacheslavna.ru/check_payment_status.php?order_id=${orderId}`, {
             headers: {
                 'Cache-Control': 'no-store, no-cache, must-revalidate, max-age=0',
@@ -25,15 +24,23 @@ const PaymentStatus = () => {
         })
         .then(response => {
             if (response.data && response.data.status) {
-                console.log('Payment status from server:', response.data.status);
                 setPaymentStatus(response.data.status);
+
+                if (response.data.status === 'succeeded') {
+                    // Передаем order_id через URL
+                    axios.get(`https://vyacheslavna.ru/admin_mail.php?order_id=${orderId}`)
+                    .then(response => {
+                        console.log('Email sending response:', response.data);
+                    })
+                    .catch(error => {
+                        console.error('Error sending email:', error);
+                    });
+                }
             } else {
-                console.error('Unexpected response format or missing status:', response.data);
                 setPaymentStatus('error');
             }
         })
         .catch(error => {
-            console.error('Error while fetching payment status:', error);
             setPaymentStatus('error');
         });
     }, []);
@@ -42,7 +49,6 @@ const PaymentStatus = () => {
         if (orderId) {
             pollPaymentStatus(orderId);
         } else {
-            console.error('No order_id found in URL');
             setPaymentStatus('error');
         }
     }, [orderId, pollPaymentStatus]);

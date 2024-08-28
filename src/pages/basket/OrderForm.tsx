@@ -51,7 +51,7 @@ const OrderForm: React.FC<OrderFormProps> = () => {
             const result = await response.json();
             console.log('Получены данные от сервера:', result);
             if (result.payment.confirmation.confirmation_url) {
-                window.location.href = result.payment.confirmation.confirmation_url;
+                window.open(result.payment.confirmation.confirmation_url, '_self');
             } else {
                 console.error('Ошибка создания платежа', result);
             }
