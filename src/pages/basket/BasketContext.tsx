@@ -1,5 +1,5 @@
 import React, {createContext, useContext, useState, ReactNode, useEffect} from 'react';
-import { ProductType } from "../App";
+import {ProductType} from "../../store/useProducts";
 
 type BasketContextType = {
 	basket: ProductType[];

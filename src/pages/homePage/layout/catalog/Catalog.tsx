@@ -2,7 +2,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import {useNavigate} from 'react-router-dom';
-import {ProductType} from "../../../../App";
+import {ProductType} from "../../../../store/useProducts";
 
 type CatalogProps = {
 	products: ProductType[]

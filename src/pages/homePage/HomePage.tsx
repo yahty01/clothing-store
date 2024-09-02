@@ -1,9 +1,8 @@
 // HomePage.tsx
 import * as React from 'react';
-import styled from 'styled-components';
 import {Main} from './layout/main/Main';
 import {Catalog} from './layout/catalog/Catalog';
-	import {ProductType} from "../../App";
+import {ProductType} from "../../store/useProducts";
 
 type HomePageProps = {
 	products: ProductType[]

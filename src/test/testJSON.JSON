@@ -1,0 +1,57 @@
+[
+  {
+    "id": 1,
+    "title": "Жакет",
+    "compound": "65% хб/ 30% ПОЛИЭСТЕР/5% ВИСКОЗА",
+    "price": 8500.00,
+    "imgUrl": "/images/jacket.jpg",
+    "sizes": ["S", "M"],
+    "size_s_quantity": 3,
+    "size_m_quantity": 2,
+    "size_c_quantity": 0
+  },
+  {
+    "id": 2,
+    "title": "Корсет White Swan",
+    "compound": "ШЕЛК",
+    "price": 5900.00,
+    "imgUrl": "/images/corset.jpg",
+    "sizes": ["S", "M"],
+    "size_s_quantity": 4,
+    "size_m_quantity": 0,
+    "size_c_quantity": 0
+  },
+  {
+    "id": 3,
+    "title": "Рубашка",
+    "compound": "БАТИСТ",
+    "price": 3900.00,
+    "imgUrl": "/images/batist_big.jpg",
+    "sizes": ["C"],
+    "size_s_quantity": 0,
+    "size_m_quantity": 0,
+    "size_c_quantity": 3
+  },
+  {
+    "id": 4,
+    "title": "Юбка",
+    "compound": "БАТИСТ",
+    "price": 2990.00,
+    "imgUrl": "/images/skirt.jpg",
+    "sizes": ["S", "M"],
+    "size_s_quantity": 0,
+    "size_m_quantity": 2,
+    "size_c_quantity": 0
+  },
+  {
+    "id": 5,
+    "title": "Платье Dream dress",
+    "compound": "ПОЛИЭСТЕР/ВИСКОЗА/ШЕЛК",
+    "price": 14900.00,
+    "imgUrl": "/images/dress.jpg",
+    "sizes": ["S", "M"],
+    "size_s_quantity": 0,
+    "size_m_quantity": 0,
+    "size_c_quantity": 0
+  }
+]

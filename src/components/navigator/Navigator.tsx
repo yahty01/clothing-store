@@ -4,7 +4,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { Button } from "@mui/material";
 import { theme } from "../../styles/theme";
 import logoA from '../../assets/images/logoA.svg';
-import {useBasket} from "../BasketContext";
+import {useBasket} from "../../pages/basket/BasketContext";
 
 export const Navigation = () => {
 	const navigate = useNavigate();
@@ -21,12 +21,6 @@ export const Navigation = () => {
 				<LogoLink to="/">
 					<Logo src={logoA} alt="logo" />
 				</LogoLink>
-
-				<StyleDivForButton>
-					<StyledButton sx={{textTransform: 'none'}} onClick={() => handleNavigate('/order/payment')} variant="text" size="small">
-						<StyledNavLink to="/">Статус оплаты/</StyledNavLink>
-					</StyledButton>
-				</StyleDivForButton>
 
 				<StyleDivForButton style={{padding: '30px'}}>
 					<StyledButton sx={{textTransform: 'none'}} onClick={() => handleNavigate('/Basket')} variant="text" size="small">
