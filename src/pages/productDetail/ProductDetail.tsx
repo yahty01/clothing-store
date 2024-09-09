@@ -11,7 +11,7 @@ import {theme} from '../../styles/theme';
 import ImageGallery from 'react-image-gallery';
 import 'react-image-gallery/styles/css/image-gallery.css';
 import {useBasket} from "../basket/BasketContext";
-import Grid from "@mui/material/Unstable_Grid2";
+import Grid from "@mui/material/Grid";
 import BackButton from "../../components/BackButton";
 import {ProductType} from "../../store/useProducts";
 
