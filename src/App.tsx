@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { Route, Routes, Navigate } from 'react-router-dom';
-import { Basket } from './pages/basket/Basket';
-import { HomePage } from './pages/homePage/HomePage';
-import { Navigation } from './components/navigator/Navigator';
+import React, {useEffect, useState} from 'react';
+import {Route, Routes, Navigate} from 'react-router-dom';
+import {Basket} from './pages/basket/Basket';
+import {HomePage} from './pages/homePage/HomePage';
+import {Navigation} from './components/navigator/Navigator';
 import ProductDetail from "./pages/productDetail/ProductDetail";
-import { PageNotFound } from "./components/404/PageNotFound";
-import { Footer } from "./components/footer/Footer";
-import { BasketProvider } from './pages/basket/BasketContext';
+import {PageNotFound} from "./components/404/PageNotFound";
+import {Footer} from "./components/footer/Footer";
+import {BasketProvider} from './pages/basket/BasketContext';
 import styled from "styled-components";
 import OrderForm from "./pages/orderForm/OrderForm";
 import PaymentStatus from "./pages/paymentStatus/PaymentStatus";
-import useProducts, { ProductType } from "./store/useProducts";
+import useProducts, {ProductType} from "./store/useProducts";
+import {carset, jacket, platye, rubashka, yoobka} from "./assets/images/testingImage/forInportPhotos";
 
 function App() {
 	const [products, setProducts] = useProducts();  // Хук для работы с продуктами
@@ -24,7 +25,7 @@ function App() {
 			title: "Жакет",
 			compound: "65% хб/ 30% ПОЛИЭСТЕР/5% ВИСКОЗА",
 			price: 8500.00,
-			imgUrl: "/images/jacket.jpg",
+			imgUrl: jacket,
 			sizes: ["S", "M"],
 			size_s_quantity: 3,
 			size_m_quantity: 2,
@@ -35,7 +36,7 @@ function App() {
 			title: "Корсет White Swan",
 			compound: "ШЕЛК",
 			price: 5900.00,
-			imgUrl: "/images/corset.jpg",
+			imgUrl: carset,
 			sizes: ["S", "M"],
 			size_s_quantity: 4,
 			size_m_quantity: 0,
@@ -46,7 +47,7 @@ function App() {
 			title: "Рубашка",
 			compound: "БАТИСТ",
 			price: 3900.00,
-			imgUrl: "/images/batist_big.jpg",
+			imgUrl: rubashka,
 			sizes: ["C"],
 			size_s_quantity: 0,
 			size_m_quantity: 0,
@@ -57,7 +58,7 @@ function App() {
 			title: "Юбка",
 			compound: "БАТИСТ",
 			price: 2990.00,
-			imgUrl: "/images/skirt.jpg",
+			imgUrl: yoobka,
 			sizes: ["S", "M"],
 			size_s_quantity: 0,
 			size_m_quantity: 2,
@@ -68,7 +69,7 @@ function App() {
 			title: "Платье Dream dress",
 			compound: "ПОЛИЭСТЕР/ВИСКОЗА/ШЕЛК",
 			price: 14900.00,
-			imgUrl: "/images/dress.jpg",
+			imgUrl: platye,
 			sizes: ["S", "M"],
 			size_s_quantity: 0,
 			size_m_quantity: 0,
@@ -80,7 +81,7 @@ function App() {
 	useEffect(() => {
 		async function fetchProducts() {
 			try {
-				const response = await fetch('https://vyacheslvna.ru/products.php'); // Ошибочный URL для тестирования ошибки верный - https://vyacheslavna.ru/products.php
+				const response = await fetch('https://vyacheslavna.ru/products.php'); // Ошибочный URL для тестирования ошибки верный - https://vyacheslavna.ru/products.php
 				if (!response.ok) {
 					throw new Error(`HTTP error! status: ${response.status}`);
 				}
@@ -90,7 +91,7 @@ function App() {
 				if (e instanceof Error) {
 					setError(e.message);
 					// Выводим сообщение об ошибке
-					alert(`Error fetching products: ${e.message}`);
+					// alert(`Error fetching products: ${e.message}`);
 				} else {
 					setError('An unexpected error occurred');
 					alert('An unexpected error occurred');
@@ -101,6 +102,7 @@ function App() {
 				setLoading(false);
 			}
 		}
+
 		fetchProducts();
 	}, [setProducts]);
 
@@ -111,7 +113,22 @@ function App() {
 	if (error) {
 		return (
 			<>
-				<p>error in App</p>
+				<p style={{position: "absolute"}}>error in App</p>
+				{/*    <BasketProvider>*/}
+				{/*	<StyledApp className="App">*/}
+				{/*		<Navigation />*/}
+				{/*		<Routes>*/}
+				{/*			<Route path="/" element={<HomePage products={products} />} />*/}
+				{/*			<Route path="/basket" element={<Basket />} />*/}
+				{/*			<Route path="/order" element={<OrderForm />} />*/}
+				{/*			<Route path="/product/:id" element={<ProductDetail products={products} />} />*/}
+				{/*			<Route path="/order/payment-status/:orderId" element={<PaymentStatus />} />*/}
+				{/*			<Route path="/404" element={<PageNotFound />} />*/}
+				{/*			<Route path="*" element={<Navigate to="/404" />} />*/}
+				{/*		</Routes>*/}
+				{/*		<Footer />*/}
+				{/*	</StyledApp>*/}
+				{/*</BasketProvider>*/}
 			</>
 		);
 	}
@@ -119,17 +136,17 @@ function App() {
 	return (
 		<BasketProvider>
 			<StyledApp className="App">
-				<Navigation />
+				<Navigation/>
 				<Routes>
-					<Route path="/" element={<HomePage products={products} />} />
-					<Route path="/basket" element={<Basket />} />
-					<Route path="/order" element={<OrderForm />} />
-					<Route path="/product/:id" element={<ProductDetail products={products} />} />
-					<Route path="/order/payment-status/:orderId" element={<PaymentStatus />} />
-					<Route path="/404" element={<PageNotFound />} />
-					<Route path="*" element={<Navigate to="/404" />} />
+					<Route path="/" element={<HomePage products={products}/>}/>
+					<Route path="/basket" element={<Basket/>}/>
+					<Route path="/order" element={<OrderForm/>}/>
+					<Route path="/product/:id" element={<ProductDetail products={products}/>}/>
+					<Route path="/order/payment-status/:orderId" element={<PaymentStatus/>}/>
+					<Route path="/404" element={<PageNotFound/>}/>
+					<Route path="*" element={<Navigate to="/404"/>}/>
 				</Routes>
-				<Footer />
+				<Footer/>
 			</StyledApp>
 		</BasketProvider>
 	);

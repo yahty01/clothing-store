@@ -4,11 +4,16 @@ import styled from "styled-components";
 import {StoreDescription} from "./store-description/StoreDescription";
 import mainPhoto from '../../../../assets/images/mainPagePhoto.jpg'
 
-export const Main = () => {
+type MainProps = {
+	setShowCatalog: React.Dispatch<React.SetStateAction<boolean>>;
+	scrollToCatalog: () => void; // Функция без параметров и возвращаемого значения
+};
+
+export const Main = ({ setShowCatalog, scrollToCatalog }: MainProps) => {
 	return (
 		<StyledMain>
 			<PhotoWrapper><img src={mainPhoto} alt="Главное фото"/></PhotoWrapper>
-			<StoreDescription/>
+			<StoreDescription setShowCatalog={setShowCatalog} scrollToCatalog={scrollToCatalog} />
 		</StyledMain>
 	);
 };
