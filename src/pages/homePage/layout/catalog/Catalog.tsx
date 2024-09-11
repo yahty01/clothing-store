@@ -3,7 +3,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import {useNavigate} from 'react-router-dom';
 import {ProductType} from "../../../../store/useProducts";
-import {GroupedCard, Title} from "./groupedCard/GroupedCard";
+import {GroupedCard} from "./groupedCard/GroupedCard";
 
 type CatalogProps = {
 	products: ProductType[];
@@ -77,5 +77,15 @@ const Image = styled.img`
   height: 638px;
   object-fit: cover;
   object-position: center;
+`;
+
+const Title = styled.h3`
+  font-family: "Fira Mono", monospace;
+  font-weight: 500;
+  &:hover {
+    cursor: pointer;
+  }
+
+  margin: 16px 0;
 `;
 
