@@ -7,7 +7,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import {SelectChangeEvent} from '@mui/material';
-import {theme} from '../../styles/theme';
+import {theme} from '../../_globalStyles/theme';
 import ImageGallery from 'react-image-gallery';
 import 'react-image-gallery/styles/css/image-gallery.css';
 import {useBasket} from "../basket/BasketContext";

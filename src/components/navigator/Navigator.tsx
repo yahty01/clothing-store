@@ -2,7 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 import { NavLink, useNavigate } from 'react-router-dom';
 import { Button } from "@mui/material";
-import { theme } from "../../styles/theme";
+import { theme } from "../../_globalStyles/theme";
 import logoA from '../../assets/images/logoA.svg';
 import {useBasket} from "../../pages/basket/BasketContext";
 

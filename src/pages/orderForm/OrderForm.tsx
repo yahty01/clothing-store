@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {Button} from '@mui/material';
 import {useForm} from "react-hook-form";
 import {useLocation} from 'react-router-dom';
-import {theme} from "../../styles/theme";
+import {theme} from "../../_globalStyles/theme";
 import Grid from '@mui/material/Grid';
 import {ProductType} from "../../store/useProducts";
 

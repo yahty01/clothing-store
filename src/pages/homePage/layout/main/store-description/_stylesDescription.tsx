@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {theme} from "../../../../../styles/theme";
+import {theme} from "../../../../../_globalStyles/theme";
 
 export const StyledMainDiv = styled.div`
   margin-top: 57px;

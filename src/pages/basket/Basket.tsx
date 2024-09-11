@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { theme } from '../../styles/theme';
+import { theme } from '../../_globalStyles/theme';
 import { Button } from '@mui/material';
 import { useBasket } from "./BasketContext";
 import { useNavigate } from 'react-router-dom';
