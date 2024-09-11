@@ -1,8 +1,9 @@
 // Catalog.tsx
 import * as React from 'react';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
-import { ProductType } from "../../../../store/useProducts";
+import {useNavigate} from 'react-router-dom';
+import {ProductType} from "../../../../store/useProducts";
+import {GroupedCard, Title} from "./groupedCard/GroupedCard";
 
 type CatalogProps = {
 	products: ProductType[];
@@ -55,27 +56,6 @@ export const Catalog = ({ products }: CatalogProps) => {
 	return <StyledCatalog>{renderProducts()}</StyledCatalog>;
 };
 
-type GroupedCardProps = {
-	mainProduct: ProductType;
-	secondaryProducts: ProductType[];
-	onCardClick: (id: string) => void;
-};
-
-const GroupedCard = ({ mainProduct, secondaryProducts, onCardClick }: GroupedCardProps) => {
-	return (
-		<GroupedCardContainer>
-			<MainImage src={mainProduct.imgUrl} alt={mainProduct.title} />
-			<GroupedCardTitles>
-				{secondaryProducts.map(product => (
-					<Title key={product.id} onClick={() => onCardClick(product.id)}>
-						{product.title} →
-					</Title>
-				))}
-			</GroupedCardTitles>
-		</GroupedCardContainer>
-	);
-};
-
 const StyledCatalog = styled.section`
   height: fit-content;
   display: flex;
@@ -83,27 +63,6 @@ const StyledCatalog = styled.section`
   gap: 109px;
   margin-left: 21.75%;
   max-width: calc(844px + 109px);
-`;
-
-const GroupedCardContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  width: fit-content;
-  cursor: pointer;
-`;
-
-const MainImage = styled.img`
-  width: 422px;
-  height: 638px;
-  object-fit: cover;
-  object-position: center;
-`;
-
-const GroupedCardTitles = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
 `;
 
 const Card = styled.div`
@@ -120,12 +79,3 @@ const Image = styled.img`
   object-position: center;
 `;
 
-const Title = styled.h3`
-  font-family: "Fira Mono", monospace;
-  font-weight: 500;
-  &:hover {
-    cursor: pointer;
-  }
-
-  margin: 16px 0;
-`;
