@@ -5,6 +5,7 @@ import { Box, Typography, CircularProgress } from '@mui/material';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import styled from 'styled-components';
+import { useBasket } from '../basket/BasketContext'; // Импортируем useBasket для очистки корзины
 
 interface RouteParams {
   [key: string]: string | undefined;
@@ -13,6 +14,7 @@ interface RouteParams {
 const PaymentStatus = () => {
     const [paymentStatus, setPaymentStatus] = useState<'pending' | 'succeeded' | 'failed' | 'error'>('pending');
     const { orderId } = useParams<RouteParams>();
+    const { clearBasket } = useBasket(); // Получаем функцию для очистки корзины
 
     const pollPaymentStatus = useCallback((orderId: string) => {
         axios.get(`https://vyacheslavna.ru/check_payment_status.php?order_id=${orderId}`, {
@@ -27,14 +29,8 @@ const PaymentStatus = () => {
                 setPaymentStatus(response.data.status);
 
                 if (response.data.status === 'succeeded') {
-                    // Передаем order_id через URL
-                    axios.get(`https://vyacheslavna.ru/admin_mail.php?order_id=${orderId}`)
-                    .then(response => {
-                        console.log('Email sending response:', response.data);
-                    })
-                    .catch(error => {
-                        console.error('Error sending email:', error);
-                    });
+                    // Очищаем корзину при успешной оплате
+                    clearBasket();
                 }
             } else {
                 setPaymentStatus('error');
@@ -43,7 +39,7 @@ const PaymentStatus = () => {
         .catch(error => {
             setPaymentStatus('error');
         });
-    }, []);
+    }, [clearBasket]);
 
     useEffect(() => {
         if (orderId) {

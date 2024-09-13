@@ -80,7 +80,7 @@ function App() {
 	useEffect(() => {
 		async function fetchProducts() {
 			try {
-				const response = await fetch('https://vyacheslvna.ru/products.php'); // Ошибочный URL для тестирования ошибки верный - https://vyacheslavna.ru/products.php
+				const response = await fetch('https://vyacheslavna.ru/products.php'); // Ошибочный URL для тестирования ошибки верный - https://vyacheslavna.ru/products.php
 				if (!response.ok) {
 					throw new Error(`HTTP error! status: ${response.status}`);
 				}
