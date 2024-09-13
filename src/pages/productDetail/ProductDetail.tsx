@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
-import {useParams, useNavigate} from 'react-router-dom';
+import {useParams} from 'react-router-dom';
 import Button from '@mui/material/Button';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
@@ -23,13 +23,13 @@ type ProductDetailProps = {
 const ProductDetail = ({products}: ProductDetailProps) => {
 	const {id} = useParams<{ id: string }>();
 	const product = products.find((product) => product.id === id);
-	const {addToBasket} = useBasket(); // Получаем функцию добавления в корзину
+	const {addToBasket} = useBasket();
 
-	const [selectedSize, setSelectedSize] = useState<string>(''); // Состояние для выбранного размера
+	const [selectedSize, setSelectedSize] = useState<string>('');
 	const galleryRef = useRef<ImageGallery>(null);
 
 	useEffect(() => {
-		window.scrollTo(0, 0); // Прокрутка страницы вверх при монтировании компонента
+		window.scrollTo(0, 0);
 	}, []);
 
 	if (!product) {
@@ -37,14 +37,6 @@ const ProductDetail = ({products}: ProductDetailProps) => {
 	}
 
 	const images = [
-		{
-			original: product.imgUrl,
-			thumbnail: product.imgUrl,
-		},
-		{
-			original: product.imgUrl,
-			thumbnail: product.imgUrl,
-		},
 		{
 			original: product.imgUrl,
 			thumbnail: product.imgUrl,
@@ -66,18 +58,17 @@ const ProductDetail = ({products}: ProductDetailProps) => {
 	};
 
 	const handleSizeChange = (event: SelectChangeEvent<string>) => {
-		setSelectedSize(event.target.value); // Устанавливаем выбранный размер
+		setSelectedSize(event.target.value);
 	};
 
 	const handleAddToBasket = () => {
 		if (selectedSize) {
-			// Создаем новый объект продукта с добавленным ключом `size`
 			const productWithSize: ProductType = {
 				...product,
-				sizeSelect: selectedSize, // Добавляем выбранный размер
+				sizeSelect: selectedSize,
 			};
 			addToBasket(productWithSize);
-			setSelectedSize('')// Передаем измененный продукт в корзину
+			setSelectedSize('');
 		}
 	};
 
