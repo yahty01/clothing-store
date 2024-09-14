@@ -34,7 +34,7 @@ export const Navigation = () => {
 };
 
 const GeneralDiv = styled.div`
-  height: 81px;
+  height: 65px;
   width: 100%;
   background-color: ${theme.mainBackgroundColor};
   display: flex;

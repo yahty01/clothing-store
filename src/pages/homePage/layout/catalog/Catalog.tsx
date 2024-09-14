@@ -8,6 +8,7 @@ import {GroupedCard} from "./groupedCard/GroupedCard";
 type CatalogProps = {
 	products: ProductType[];
 };
+const skos = '150px'
 
 export const Catalog = ({ products }: CatalogProps) => {
 	const navigate = useNavigate();
@@ -30,7 +31,10 @@ export const Catalog = ({ products }: CatalogProps) => {
 			return (
 				<>
 					{products.slice(0, 2).map(item => (
-						<Card key={item.id} onClick={() => handleCardClick(item.id)}>
+						<Card
+							key={item.id}
+							onClick={() => handleCardClick(item.id)}
+							>
 							<Image src={item.imgUrl} alt={item.title} />
 							<Title>{item.title} →</Title>
 						</Card>
@@ -56,25 +60,50 @@ export const Catalog = ({ products }: CatalogProps) => {
 	return <StyledCatalog>{renderProducts()}</StyledCatalog>;
 };
 
+
 const StyledCatalog = styled.section`
   height: fit-content;
   display: flex;
   flex-wrap: wrap;
   gap: 109px;
-  margin-left: 21.75%;
-  max-width: calc(844px + 109px);
+  max-width: calc(844px + 109px + ${skos} + 300px);
+	margin: 0 auto ;
+	
+	
+  @media (max-width: 1500px) {
+  }
 `;
 
 const Card = styled.div`
-  width: fit-content;
+  width: 422px;
   overflow: hidden;
   text-align: center;
   cursor: pointer;
+	height: fit-content;
+  &:nth-child(1) {
+    margin-left: 300px;
+  }
+  &:nth-child(n+5):nth-of-type(odd) {
+    margin-left: 300px;
+  }
+	&:nth-child(4) {
+		margin-top: 312px;
+	}
+	
+	@media (max-width: 1500px) {
+		width: 300px;
+	}
+
+  @media (max-width: 1600px) {
+    width: 350px;
+  }
+	
+
 `;
 
 const Image = styled.img`
-  width: 422px;
-  height: 638px;
+  width: 100%;
+  height: auto;
   object-fit: cover;
   object-position: center;
 `;

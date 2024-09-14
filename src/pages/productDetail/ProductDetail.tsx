@@ -40,6 +40,12 @@ const ProductDetail = ({products}: ProductDetailProps) => {
 		{
 			original: product.imgUrl,
 			thumbnail: product.imgUrl,
+		},		{
+			original: product.imgUrl,
+			thumbnail: product.imgUrl,
+		},		{
+			original: product.imgUrl,
+			thumbnail: product.imgUrl,
 		},
 	];
 
@@ -132,6 +138,7 @@ const StyledProductDetail = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 20px;
+	margin: 0 auto;
 
   button {
     font-family: "Fira Code", monospace;

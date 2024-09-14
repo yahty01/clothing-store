@@ -1,12 +1,10 @@
 import styled from "styled-components";
 
 export const GroupedCardContainer = styled.div`
-	width: 857px;
   display: flex;
   flex-direction: column;
   gap: 16px;
-  //width: fit-content;
-  cursor: pointer;
+	margin-left: 100px;
 `;
 export const MainImage = styled.img`
   //width: 422px;

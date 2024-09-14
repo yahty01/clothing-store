@@ -16,8 +16,8 @@ type StoreDescriptionProps = {
 
 export const StoreDescription = ({ setShowCatalog, scrollToCatalog }: StoreDescriptionProps) => {
 	const handleCatalogClick = () => {
-		setShowCatalog(true);
 		scrollToCatalog(); // Выполняем прокрутку сразу после открытия каталога
+		setShowCatalog(true);
 	};
 
 	return (
