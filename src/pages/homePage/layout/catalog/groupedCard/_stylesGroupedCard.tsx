@@ -1,15 +1,16 @@
 import styled from "styled-components";
 
 export const GroupedCardContainer = styled.div`
+	width: 857px;
   display: flex;
   flex-direction: column;
   gap: 16px;
-  width: fit-content;
+  //width: fit-content;
   cursor: pointer;
 `;
 export const MainImage = styled.img`
-  width: 422px;
-  height: 638px;
+  //width: 422px;
+  //height: 638px;
   object-fit: cover;
   object-position: center;
 `;

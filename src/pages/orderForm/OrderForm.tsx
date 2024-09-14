@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import { Button } from '@mui/material';
 import { useForm } from "react-hook-form";
 import { useLocation } from 'react-router-dom';
-import { theme } from "../../styles/theme";
 import Grid from '@mui/material/Grid';
 import { ProductType } from "../../store/useProducts";
+import {theme} from "../../_globalStyles/theme";
 
 interface OrderFormProps {}
 
@@ -117,14 +117,16 @@ const OrderForm: React.FC<OrderFormProps> = () => {
 
 // Стили для формы
 const StyledForm = styled.form`
+    flex-grow: 1;
   width: 100%;
   max-width: 1219px;
   font-family: 'NEXT ART', sans-serif !important;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  margin: 0 auto;
+  justify-content: center;
+  margin: auto auto;
   padding: 20px;
+    
 
   button {
     font-family: "Fira Mono", monospace;
@@ -152,21 +154,21 @@ const StyledButton = styled(Button)`
 `;
 
 const StyledFieldGrid = styled(Grid)`
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 
-  input {
-    font-size: 16px;
-    border: none;
-    border-bottom: 1px solid ${theme.secondaryTextColor};
-    background-color: ${theme.mainBackgroundColor};
-    width: 100%;
-    padding: 8px;
-  }
+    input {
+        font-size: 16px;
+        border: none;
+        border-bottom: 1px solid ${theme.secondaryTextColor};
+        background-color: ${theme.mainBackgroundColor};
+        width: 100%;
+        padding: 8px;
+    }
 
-  span {
-    color: red;
-    font-size: 12px;
-  }
+    span {
+        color: rgba(204, 5, 5, 0.74);
+        font-size: 12px;
+    }
 `;
 
 const TotalPrice = styled.h2`
