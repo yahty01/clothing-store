@@ -12,6 +12,7 @@ import OrderForm from "./pages/orderForm/OrderForm";
 import PaymentStatus from "./pages/paymentStatus/PaymentStatus";
 import useProducts, {ProductType} from "./store/useProducts";
 import {carset, jacket, platye, rubashka, yoobka} from "./assets/images/testingImage/forInportPhotos";
+import Loading from "./pages/ loading/Loading";
 
 function App() {
 	const [products, setProducts] = useProducts();  // Хук для работы с продуктами
@@ -74,6 +75,46 @@ function App() {
 			size_s_quantity: 0,
 			size_m_quantity: 0,
 			size_c_quantity: 0
+		}, {
+			id: '6',
+			title: "Платье Dream dress",
+			compound: "ПОЛИЭСТЕР/ВИСКОЗА/ШЕЛК",
+			price: 14900.00,
+			imgUrl: platye,
+			sizes: ["S", "M"],
+			size_s_quantity: 0,
+			size_m_quantity: 0,
+			size_c_quantity: 0
+		}, {
+			id: '7',
+			title: "Платье Dream dress",
+			compound: "ПОЛИЭСТЕР/ВИСКОЗА/ШЕЛК",
+			price: 14900.00,
+			imgUrl: platye,
+			sizes: ["S", "M"],
+			size_s_quantity: 0,
+			size_m_quantity: 0,
+			size_c_quantity: 0
+		}, {
+			id: '8',
+			title: "Платье Dream dress",
+			compound: "ПОЛИЭСТЕР/ВИСКОЗА/ШЕЛК",
+			price: 14900.00,
+			imgUrl: platye,
+			sizes: ["S", "M"],
+			size_s_quantity: 0,
+			size_m_quantity: 0,
+			size_c_quantity: 0
+		}, {
+			id: '9',
+			title: "Платье Dream dress",
+			compound: "ПОЛИЭСТЕР/ВИСКОЗА/ШЕЛК",
+			price: 14900.00,
+			imgUrl: platye,
+			sizes: ["S", "M"],
+			size_s_quantity: 0,
+			size_m_quantity: 0,
+			size_c_quantity: 0
 		}
 	];
 
@@ -99,42 +140,15 @@ function App() {
 				// В случае ошибки устанавливаем начальные данные
 				setProducts(initialProducts);
 			} finally {
-				setLoading(false);
+					setLoading(false);
 			}
 		}
 
 		fetchProducts();
-	}, [setProducts]);
+	}, []);
 
-	// Отображение загрузки
-	if (loading) return <p>Loading...</p>;
-
-	// Временное решения для локального тестирования
-	if (error) {
-		return (
-			<>
-				<p style={{position: "absolute"}}>error in App</p>
-				{/*    <BasketProvider>*/}
-				{/*	<StyledApp className="App">*/}
-				{/*		<Navigation />*/}
-				{/*		<Routes>*/}
-				{/*			<Route path="/" element={<HomePage products={products} />} />*/}
-				{/*			<Route path="/basket" element={<Basket />} />*/}
-				{/*			<Route path="/order" element={<OrderForm />} />*/}
-				{/*			<Route path="/product/:id" element={<ProductDetail products={products} />} />*/}
-				{/*			<Route path="/order/payment-status/:orderId" element={<PaymentStatus />} />*/}
-				{/*			<Route path="/404" element={<PageNotFound />} />*/}
-				{/*			<Route path="*" element={<Navigate to="/404" />} />*/}
-				{/*		</Routes>*/}
-				{/*		<Footer />*/}
-				{/*	</StyledApp>*/}
-				{/*</BasketProvider>*/}
-			</>
-		);
-	}
-
-	return (
-		<BasketProvider>
+	const AppRender = () => {
+		return (<BasketProvider>
 			<StyledApp className="App">
 				<Navigation/>
 				<Routes>
@@ -149,7 +163,32 @@ function App() {
 				<Footer/>
 			</StyledApp>
 		</BasketProvider>
-	);
+		)
+	}
+
+	// Отображение загрузки
+	if (loading) {
+		return (
+			<BasketProvider>
+				<StyledApp>
+					<Navigation/>
+					<Loading/>
+				</StyledApp>
+			</BasketProvider>
+		)
+	}
+
+	// Временное решения для локального тестирования
+	if (error) {
+		return (
+			<>
+				<ErrorP>Режим ошибочного подключения</ErrorP>
+				<AppRender/>
+			</>
+		);
+	}
+
+	return <AppRender/>
 }
 
 export default App;
@@ -159,3 +198,13 @@ const StyledApp = styled.div`
   flex-direction: column;
   min-height: calc(100vh - 20px);
 `;
+
+const ErrorP = styled.p`
+
+  color: red;
+  z-index: 9;
+  font-size: 50px;
+  font-weight: 800;
+  opacity: 0.4;
+  font-family: "Fira Mono", monospace;
+`
