@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { useLocation } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import { ProductType } from "../../store/useProducts";
-import {theme} from "../../_globalStyles/theme";
+import { theme } from "../../_globalStyles/theme";
 
 interface OrderFormProps {}
 
@@ -39,7 +39,7 @@ const OrderForm: React.FC<OrderFormProps> = () => {
       };
   
       // Логирование данных заказа, включая комментарий
-      console.log('Отправляемые данные заказа:', orderData);  // Посмотри в консоли браузера, приходит ли комментарий
+      console.log('Отправляемые данные заказа:', orderData);
   
       try {
           const response = await fetch('https://vyacheslavna.ru/process_payment.php', {
@@ -74,7 +74,7 @@ const OrderForm: React.FC<OrderFormProps> = () => {
 
     return (
         <StyledForm onSubmit={handleSubmit(onSubmit)}>
-            <Grid container spacing={2}>
+            <Grid container spacing={6}> {/* Увеличиваем расстояние между столбцами и строками */}
                 <StyledFieldGrid item xl={4} md={4} xs={12}>
                     <input placeholder={'Фамилия'} {...register("lastName", { required: true })} />
                     {errors.lastName && <span>Это поле обязательно</span>}
@@ -126,7 +126,6 @@ const StyledForm = styled.form`
   justify-content: center;
   margin: auto auto;
   padding: 20px;
-    
 
   button {
     font-family: "Fira Mono", monospace;
@@ -154,7 +153,7 @@ const StyledButton = styled(Button)`
 `;
 
 const StyledFieldGrid = styled(Grid)`
-    margin-bottom: 20px;
+    margin-bottom: 50px; /* Еще больше увеличиваем расстояние между строками */
 
     input {
         font-size: 16px;
@@ -162,7 +161,7 @@ const StyledFieldGrid = styled(Grid)`
         border-bottom: 1px solid ${theme.secondaryTextColor};
         background-color: ${theme.mainBackgroundColor};
         width: 100%;
-        padding: 8px;
+        padding: 16px; /* Увеличиваем внутренние отступы */
     }
 
     span {
