@@ -153,20 +153,31 @@ const StyledButton = styled(Button)`
 `;
 
 const StyledFieldGrid = styled(Grid)`
-    margin-bottom: 50px; 
+    margin-bottom: 50px;
 
     input {
         font-size: 16px;
         border: none;
+        outline: none;
         border-bottom: 1px solid ${theme.secondaryTextColor};
         background-color: ${theme.mainBackgroundColor};
         width: 100%;
-        padding: 8px 0 5px 0; 
-        color: rgba(255, 255, 255, 0.7); 
+        padding: 8px 0 5px 0;
+        color: black;           
+        transition: border-bottom-color 0.3s, border-bottom-width 0.3s; /* Плавный переход для линии */
 
+        &:focus {
+            outline: none;
+            border-bottom: 2px solid ${theme.mainTextColor}; /* Линия становится толще и темнее */
+        }
+
+      
+        /* Убираем стили автозаполнения */
+        &:-webkit-autofill {
+             -webkit-box-shadow: 0 0 0 1000px ${theme.mainBackgroundColor} inset;
+            -webkit-text-fill-color: black;
+        }
     }
-
-  
 
     span {
         color: rgba(204, 5, 5, 0.74);
