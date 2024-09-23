@@ -153,7 +153,7 @@ const StyledButton = styled(Button)`
 `;
 
 const StyledFieldGrid = styled(Grid)`
-    margin-bottom: 50px; /* Еще больше увеличиваем расстояние между строками */
+    margin-bottom: 50px; 
 
     input {
         font-size: 16px;
@@ -161,8 +161,12 @@ const StyledFieldGrid = styled(Grid)`
         border-bottom: 1px solid ${theme.secondaryTextColor};
         background-color: ${theme.mainBackgroundColor};
         width: 100%;
-        padding: 16px; /* Увеличиваем внутренние отступы */
+        padding: 8px 0 5px 0; 
+        color: rgba(255, 255, 255, 0.7); 
+
     }
+
+  
 
     span {
         color: rgba(204, 5, 5, 0.74);
