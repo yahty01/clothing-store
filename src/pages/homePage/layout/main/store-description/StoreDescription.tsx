@@ -10,14 +10,12 @@ import {
 } from "./_stylesDescription";
 
 type StoreDescriptionProps = {
-	setShowCatalog: (value: boolean) => void;
 	scrollToCatalog: () => void;
 };
 
-export const StoreDescription = ({ setShowCatalog, scrollToCatalog }: StoreDescriptionProps) => {
+export const StoreDescription = ({ scrollToCatalog }: StoreDescriptionProps) => {
 	const handleCatalogClick = () => {
 		scrollToCatalog(); // Выполняем прокрутку сразу после открытия каталога
-		setShowCatalog(true);
 	};
 
 	return (

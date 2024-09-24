@@ -140,7 +140,7 @@ function App() {
 				// В случае ошибки устанавливаем начальные данные
 				setProducts(initialProducts);
 			} finally {
-					setLoading(false);
+				setLoading(false);
 			}
 		}
 
@@ -149,20 +149,20 @@ function App() {
 
 	const AppRender = () => {
 		return (<BasketProvider>
-			<StyledApp className="App">
-				<Navigation/>
-				<Routes>
-					<Route path="/" element={<HomePage products={products}/>}/>
-					<Route path="/basket" element={<Basket/>}/>
-					<Route path="/order" element={<OrderForm/>}/>
-					<Route path="/product/:id" element={<ProductDetail products={products}/>}/>
-					<Route path="/order/payment-status/:orderId" element={<PaymentStatus/>}/>
-					<Route path="/404" element={<PageNotFound/>}/>
-					<Route path="*" element={<Navigate to="/404"/>}/>
-				</Routes>
-				<Footer/>
-			</StyledApp>
-		</BasketProvider>
+				<StyledApp className="App">
+					<Navigation/>
+					<Routes>
+						<Route path="/" element={<HomePage products={products}/>}/>
+						<Route path="/basket" element={<Basket/>}/>
+						<Route path="/order" element={<OrderForm/>}/>
+						<Route path="/product/:id" element={<ProductDetail products={products}/>}/>
+						<Route path="/order/payment-status/:orderId" element={<PaymentStatus/>}/>
+						<Route path="/404" element={<PageNotFound/>}/>
+						<Route path="*" element={<Navigate to="/404"/>}/>
+					</Routes>
+					<Footer/>
+				</StyledApp>
+			</BasketProvider>
 		)
 	}
 
@@ -182,8 +182,8 @@ function App() {
 	if (error) {
 		return (
 			<>
-				<ErrorP>Режим ошибочного подключения</ErrorP>
 				<AppRender/>
+				<ErrorP>Режим ошибки</ErrorP>
 			</>
 		);
 	}
@@ -200,7 +200,7 @@ const StyledApp = styled.div`
 `;
 
 const ErrorP = styled.p`
-
+	background-color: orange;
   color: red;
   z-index: 9;
   font-size: 50px;

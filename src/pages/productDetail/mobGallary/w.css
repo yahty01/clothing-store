@@ -1,0 +1,22 @@
+.swiper-scrollbar {
+  position: absolute;
+  left: 0 !important;
+  bottom: 0 !important;
+  width: 100% !important;
+  height: 5px !important;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.swiper-scrollbar-drag {
+  background: rgb(49, 49, 49) !important;
+  height: 100%;
+  border-radius: 0;
+}
+
+.mySwiper2 {
+  padding-bottom: 20px; /* Добавляем отступ снизу для скроллбара */
+}
+
+.mySwiper2 .swiper-wrapper {
+  margin-bottom: 10px; /* Добавляем отступ между слайдами и скроллбаром */
+}

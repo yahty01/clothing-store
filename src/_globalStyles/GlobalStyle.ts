@@ -9,7 +9,7 @@ export const GlobalStyle = createGlobalStyle`
   ::-webkit-scrollbar {
     display: none; /* WebKit-based browsers */
   }
-  
+
   *, *::before, *::after {
     padding: 0;
     margin: 0;
@@ -17,7 +17,7 @@ export const GlobalStyle = createGlobalStyle`
     font-optical-sizing: auto;
     font-style: normal;
   }
-  
+
   body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -36,37 +36,52 @@ export const GlobalStyle = createGlobalStyle`
   ul {
     list-style: none;
   }
-  
+
   button {
     font-family: "Fira Mono", monospace;
   }
 
-  .image-gallery {
-    max-width: 600px; /* Устанавливает максимальную ширину контейнера галереи */
-    width: 100%; /* Устанавливает ширину контейнера галереи на 100% от родительского элемента */
-    margin: 0 auto; /* Центрирует галерею по горизонтали */
+  .swiper-scrollbar {
+    position: absolute;
+    left: 0 !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    height: 5px !important;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 0;
+
   }
 
-  .image-gallery-thumbnail {
-    border: 2px solid ${theme.mainBackgroundColor}; /* Устанавливает цвет границы миниатюр */
-    border-radius: 8px; /* Скругляет углы миниатюр */
+  .swiper-scrollbar-drag {
+    background: rgb(49, 49, 49) !important;
+    height: 100%;
+    border-radius: 0;
   }
 
-  .image-gallery-thumbnail.active,
-  .image-gallery-thumbnail:hover {
-    border-color: ${theme.secondaryTextColor}; /* Устанавливает цвет границы активной миниатюры и миниатюры при наведении */
+  .mySwiper2 {
+    position: relative;
   }
 
-  .image-gallery-icon {
-    color: ${theme.mainTextColor}; /* Устанавливает цвет навигационных стрелок */
+  .mySwiper2 .swiper-scrollbar {
+    width: 3px !important;
+    height: 100% !important;
+    left: auto !important;
+    right: 0 !important;
+    top: 0 !important;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 0;
   }
 
-  .image-gallery-icon:hover {
-    color: ${theme.secondaryTextColor}; /* Устанавливает цвет навигационных стрелок при наведении */
+  .mySwiper2 .swiper-scrollbar-drag {
+    width: 8px !important;
+    background: rgb(49, 49, 49) !important;
+    border-radius: 0;
   }
-  .custom-gallery .image-gallery-slide img {
-    height: 400px; /* Установите желаемую высоту */
-    width: 100%;
-    object-fit: contain;
+
+  .mySwiper2 .swiper-wrapper {
+    margin-right: 10px; /* Добавляем отступ справа для скроллбара */
   }
+
+  
+
 `

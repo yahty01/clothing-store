@@ -1,6 +1,6 @@
 import * as React from "react";
 import {ProductType} from "../../../../../store/useProducts";
-import {GroupedCardContainer, GroupedCardTitles, MainImage, Title} from "./_stylesGroupedCard";
+import {GroupedCardContainer, GroupedCardTitles, MainImage, NameProduct, Title} from "./_stylesGroupedCard";
 
 type GroupedCardProps = {
 	mainProduct: ProductType;
@@ -11,6 +11,7 @@ export const GroupedCard = ({mainProduct, secondaryProducts, onCardClick}: Group
 	return (
 		<GroupedCardContainer>
 			<MainImage src={mainProduct.imgUrl} alt={mainProduct.title}/>
+			<NameProduct>Batist set</NameProduct>
 			<GroupedCardTitles>
 				{secondaryProducts.map(product => (
 					<Title key={product.id} onClick={() => onCardClick(product.id)}>
