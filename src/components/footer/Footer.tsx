@@ -41,7 +41,7 @@ const StyledFooter = styled.footer`
 	  display: flex;
 	  justify-content: space-around;
     width: 92.6%;
-    border-bottom: 0.5px solid ${theme.secondaryTextColor};
+    border-bottom: thin solid ${theme.underlining};
   }
 	
 	small {

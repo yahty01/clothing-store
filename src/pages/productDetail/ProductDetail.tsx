@@ -1,19 +1,23 @@
-import React, {useEffect, useRef, useState} from 'react';
-import styled from 'styled-components';
+import React, {useEffect, useState} from 'react';
 import {useParams} from 'react-router-dom';
-import Button from '@mui/material/Button';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import {SelectChangeEvent} from '@mui/material';
-import {theme} from '../../_globalStyles/theme';
-import ImageGallery from 'react-image-gallery';
 import 'react-image-gallery/styles/css/image-gallery.css';
 import {useBasket} from "../basket/BasketContext";
 import Grid from "@mui/material/Grid";
 import BackButton from "../../components/BackButton";
 import {ProductType} from "../../store/useProducts";
+import {
+	Compound,
+	Price,
+	StyledButton,
+	StyledProductDetail,
+	Title
+} from "./_stylesProductDetail";
+import ProductGallery from "./ProductGallary";
 
 
 type ProductDetailProps = {
@@ -26,7 +30,6 @@ const ProductDetail = ({products}: ProductDetailProps) => {
 	const {addToBasket} = useBasket();
 
 	const [selectedSize, setSelectedSize] = useState<string>('');
-	const galleryRef = useRef<ImageGallery>(null);
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
@@ -37,33 +40,12 @@ const ProductDetail = ({products}: ProductDetailProps) => {
 	}
 
 	const images = [
-		{
-			original: product.imgUrl,
-			thumbnail: product.imgUrl,
-		},		{
-			original: product.imgUrl,
-			thumbnail: product.imgUrl,
-		},		{
-			original: product.imgUrl,
-			thumbnail: product.imgUrl,
-		},
+		product.imgUrl,
+		product.imgUrl,
+		product.imgUrl,
 	];
 
-	const handleImageClick = (e: React.MouseEvent<HTMLDivElement>) => {
-		const rect = (e.target as HTMLDivElement).getBoundingClientRect();
-		const clickX = e.clientX - rect.left;
-		const width = rect.width;
-
-		if (clickX < width / 2) {
-			// Clicked on the left half
-			galleryRef.current?.slideToIndex(galleryRef.current?.getCurrentIndex() - 1);
-		} else {
-			// Clicked on the right half
-			galleryRef.current?.slideToIndex(galleryRef.current?.getCurrentIndex() + 1);
-		}
-	};
-
-	const handleSizeChange = (event: SelectChangeEvent<string>) => {
+	const handleSizeChange = (event: SelectChangeEvent) => {
 		setSelectedSize(event.target.value);
 	};
 
@@ -82,27 +64,13 @@ const ProductDetail = ({products}: ProductDetailProps) => {
 		<StyledProductDetail>
 			<BackButton/>
 			<Grid container spacing={2}>
-				<Grid>
-					<StyledImageGalleryWrapper onClick={handleImageClick}>
-						<ImageGallery
-							ref={galleryRef}
-							items={images}
-							showPlayButton={false}
-							showFullscreenButton={false}
-							showNav={false}
-							showThumbnails={true}
-							infinite={true}
-							autoPlay={false}
-							slideDuration={550}
-							additionalClass="custom-gallery"
-						/>
-					</StyledImageGalleryWrapper>
-				</Grid>
+
+				<ProductGallery images={images} />
 
 				<Grid>
 					<Title>{product.title}</Title>
 					<Price>{product.price}₽</Price>
-					<FormControl fullWidth size="small"  variant="standard" color={"secondary"}>
+					<FormControl fullWidth size="small" variant="standard" color={"secondary"}>
 						<InputLabel id="size-select-label">Размер:</InputLabel>
 						<Select
 							labelId="size-select-label"
@@ -126,59 +94,9 @@ const ProductDetail = ({products}: ProductDetailProps) => {
 					</StyledButton>
 				</Grid>
 			</Grid>
+
 		</StyledProductDetail>
 	);
 };
-
-const StyledProductDetail = styled.div`
-  font-family: 'NEXT ART', sans-serif !important;
-  font-weight: 500;
-  line-height: 1.5;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-	margin: 0 auto;
-
-  button {
-    font-family: "Fira Code", monospace;
-  }
-`;
-
-const StyledImageGalleryWrapper = styled.div`
-  width: 100%;
-  max-width: 600px;
-  margin: 20px 0;
-`;
-
-const Title = styled.h2`
-  margin: 20px 0;
-  font-weight: semi-bold;
-`;
-
-const Price = styled.p`
-  font-size: 20px;
-  margin: 10px 0;
-`;
-
-const Compound = styled.p`
-  margin: 10px 0;
-`;
-
-export const StyledButton = styled(Button)`
-  && {
-    font-size: 16px;
-    background-color: ${theme.mainBackgroundColor};
-    color: ${theme.mainTextColor};
-    border-radius: 8px;
-    padding: 8px 16px;
-
-    &:hover {
-      background-color: transparent;
-      color: ${theme.secondaryTextColor};
-      box-shadow: none;
-    }
-  }
-`;
 
 export default ProductDetail;
