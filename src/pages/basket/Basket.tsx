@@ -1,11 +1,11 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { theme } from '../../styles/theme';
+import { theme } from '../../_globalStyles/theme';
 import { Button } from '@mui/material';
-import { useBasket } from "../../components/BasketContext";
+import { useBasket } from "./BasketContext";
 import { useNavigate } from 'react-router-dom';
-import {ProductType} from "../../App";
 import BackButton from "../../components/BackButton";
+import { ProductType } from "../../store/useProducts";
 
 type Props = {};
 
@@ -14,7 +14,6 @@ export const Basket = (props: Props) => {
 	const navigate = useNavigate();
 
 	const handleOrderClick = () => {
-		// Передача товаров и суммы заказа через navigate
 		navigate('/order', {
 			state: {
 				products: Object.values(groupedBasket),
@@ -23,12 +22,13 @@ export const Basket = (props: Props) => {
 		});
 	};
 
-	// Сгруппируем товары по их ID
-	const groupedBasket = basket.reduce((acc, product) => {
-		if (acc[product.id]) {
-			acc[product.id].quantity += 1;
+	// Сгруппируем товары по их ID и размеру
+	const groupedBasket = basket.reduce((acc, product: ProductType) => {
+		const key = `${product.id}-${product.sizeSelect}`; // Ключ для группировки по ID и размеру
+		if (acc[key]) {
+			acc[key].quantity += 1;
 		} else {
-			acc[product.id] = { ...product, quantity: 1 };
+			acc[key] = { ...product, quantity: 1 };
 		}
 		return acc;
 	}, {} as Record<string, ProductType & { quantity: number }>);
@@ -37,7 +37,7 @@ export const Basket = (props: Props) => {
 
 	return (
 		<StyledBasket>
-			<BackButton/>
+			<BackButton />
 			<div>Корзина</div>
 			{basket.length === 0 ? (
 				<EmptyBasket>Ваша корзина пуста</EmptyBasket>
@@ -46,12 +46,13 @@ export const Basket = (props: Props) => {
 					{Object.values(groupedBasket).map((product) => {
 						totalBasket += product.price * product.quantity;
 						return (
-							<ProductCard key={product.id}>
+							<ProductCard key={`${product.id}-${product.sizeSelect}`}>
 								<ProductImage src={product.imgUrl} alt={product.title} />
 								<ProductDetails>
 									<ProductTitle>{product.title}</ProductTitle>
+									<ProductSize>Размер: {product.sizeSelect}</ProductSize> {/*выбранный размер*/}
 									<ProductPrice>{product.price * product.quantity}₽</ProductPrice>
-									<ProductQuantity>{product.quantity} шт</ProductQuantity>
+									<ProductQuantity>{product.quantity} шт</ProductQuantity> {/*количество товара выбранного размера*/}
 								</ProductDetails>
 								<StyledButton onClick={() => removeProductToBasket(product.id)}>x</StyledButton>
 							</ProductCard>
@@ -61,7 +62,7 @@ export const Basket = (props: Props) => {
 			)}
 			<SummaryDiv>
 				<span>Всего: {totalBasket}₽</span>
-				<StyledButton sx={{textTransform: 'none'}} onClick={handleOrderClick}>Оформить заказ</StyledButton>
+				<StyledButton sx={{ textTransform: 'none' }} onClick={handleOrderClick}>Оформить заказ</StyledButton>
 			</SummaryDiv>
 		</StyledBasket>
 	);
@@ -112,6 +113,12 @@ const ProductDetails = styled.div`
 
 const ProductTitle = styled.h3`
   margin: 0;
+`;
+
+const ProductSize = styled.p`
+  margin: 5px 0;
+  font-size: 18px;
+  color: ${theme.secondaryTextColor};
 `;
 
 const ProductPrice = styled.p`

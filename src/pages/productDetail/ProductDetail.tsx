@@ -1,29 +1,35 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
-import { useParams, useNavigate } from 'react-router-dom';
-import { ProductType } from '../../../../../App';
-import { Button } from '@mui/material';
-import { theme } from '../../../../../styles/theme';
+import {useParams} from 'react-router-dom';
+import Button from '@mui/material/Button';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import {SelectChangeEvent} from '@mui/material';
+import {theme} from '../../_globalStyles/theme';
 import ImageGallery from 'react-image-gallery';
 import 'react-image-gallery/styles/css/image-gallery.css';
-import {useBasket} from "../../../../../components/BasketContext";
-import Grid from "@mui/material/Unstable_Grid2";
-import BackButton from "../../../../../components/BackButton";
+import {useBasket} from "../basket/BasketContext";
+import Grid from "@mui/material/Grid";
+import BackButton from "../../components/BackButton";
+import {ProductType} from "../../store/useProducts";
+
 
 type ProductDetailProps = {
 	products: ProductType[];
 };
 
-const ProductDetail = ({ products }: ProductDetailProps) => {
-	const { id } = useParams<{ id: string }>();
+const ProductDetail = ({products}: ProductDetailProps) => {
+	const {id} = useParams<{ id: string }>();
 	const product = products.find((product) => product.id === id);
-	const navigate = useNavigate();
-	const { addToBasket } = useBasket(); // Получаем функцию добавления в корзину
+	const {addToBasket} = useBasket();
 
+	const [selectedSize, setSelectedSize] = useState<string>('');
 	const galleryRef = useRef<ImageGallery>(null);
 
 	useEffect(() => {
-		window.scrollTo(0, 0); // Прокрутка страницы вверх при монтировании компонента
+		window.scrollTo(0, 0);
 	}, []);
 
 	if (!product) {
@@ -34,12 +40,10 @@ const ProductDetail = ({ products }: ProductDetailProps) => {
 		{
 			original: product.imgUrl,
 			thumbnail: product.imgUrl,
-		},
-		{
+		},		{
 			original: product.imgUrl,
 			thumbnail: product.imgUrl,
-		},
-		{
+		},		{
 			original: product.imgUrl,
 			thumbnail: product.imgUrl,
 		},
@@ -59,8 +63,19 @@ const ProductDetail = ({ products }: ProductDetailProps) => {
 		}
 	};
 
+	const handleSizeChange = (event: SelectChangeEvent<string>) => {
+		setSelectedSize(event.target.value);
+	};
+
 	const handleAddToBasket = () => {
-		addToBasket(product);
+		if (selectedSize) {
+			const productWithSize: ProductType = {
+				...product,
+				sizeSelect: selectedSize,
+			};
+			addToBasket(productWithSize);
+			setSelectedSize('');
+		}
 	};
 
 	return (
@@ -87,9 +102,28 @@ const ProductDetail = ({ products }: ProductDetailProps) => {
 				<Grid>
 					<Title>{product.title}</Title>
 					<Price>{product.price}₽</Price>
-					<Sizes>Доступные размеры: {product.size}</Sizes>
+					<FormControl fullWidth size="small"  variant="standard" color={"secondary"}>
+						<InputLabel id="size-select-label">Размер:</InputLabel>
+						<Select
+							labelId="size-select-label"
+							id="size-select"
+							value={selectedSize} // Отображаем выбранный размер
+							onChange={handleSizeChange} // Обработка выбора размера
+							disabled={product.size_s_quantity === 0 && product.size_m_quantity === 0 && product.size_c_quantity === 0}
+						>
+							{product.size_s_quantity > 0 && <MenuItem value="S">S</MenuItem>}
+							{product.size_m_quantity > 0 && <MenuItem value="M">M</MenuItem>}
+							{product.size_c_quantity > 0 && <MenuItem value="Единый">Единый</MenuItem>}
+						</Select>
+					</FormControl>
 					<Compound>Состав: {product.compound}</Compound>
-					<StyledButton sx={{textTransform: 'none'}} onClick={handleAddToBasket}>Добавить в корзину</StyledButton>
+					<StyledButton
+						sx={{textTransform: 'none'}}
+						onClick={handleAddToBasket}
+						disabled={!selectedSize} // Отключаем кнопку, если размер не выбран
+					>
+						Добавить в корзину
+					</StyledButton>
 				</Grid>
 			</Grid>
 		</StyledProductDetail>
@@ -104,9 +138,11 @@ const StyledProductDetail = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 20px;
-	button{
-		font-family: "Fira Code", monospace;
-	}
+	margin: 0 auto;
+
+  button {
+    font-family: "Fira Code", monospace;
+  }
 `;
 
 const StyledImageGalleryWrapper = styled.div`
@@ -117,15 +153,11 @@ const StyledImageGalleryWrapper = styled.div`
 
 const Title = styled.h2`
   margin: 20px 0;
-	font-weight: semi-bold;
+  font-weight: semi-bold;
 `;
 
 const Price = styled.p`
   font-size: 20px;
-  margin: 10px 0;
-`;
-
-const Sizes = styled.p`
   margin: 10px 0;
 `;
 

@@ -5,17 +5,18 @@ import { Box, Typography, CircularProgress } from '@mui/material';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import styled from 'styled-components';
+import { useBasket } from '../basket/BasketContext'; // Импортируем useBasket для очистки корзины
 
 interface RouteParams {
-  [key: string]: string | undefined; // Correct typing for useParams
+  [key: string]: string | undefined;
 }
 
 const PaymentStatus = () => {
     const [paymentStatus, setPaymentStatus] = useState<'pending' | 'succeeded' | 'failed' | 'error'>('pending');
-    const { orderId } = useParams<RouteParams>(); // Correctly typed useParams
+    const { orderId } = useParams<RouteParams>();
+    const { clearBasket } = useBasket(); // Получаем функцию для очистки корзины
 
     const pollPaymentStatus = useCallback((orderId: string) => {
-        console.log('Starting polling for payment status with order_id:', orderId);
         axios.get(`https://vyacheslavna.ru/check_payment_status.php?order_id=${orderId}`, {
             headers: {
                 'Cache-Control': 'no-store, no-cache, must-revalidate, max-age=0',
@@ -25,24 +26,25 @@ const PaymentStatus = () => {
         })
         .then(response => {
             if (response.data && response.data.status) {
-                console.log('Payment status from server:', response.data.status);
                 setPaymentStatus(response.data.status);
+
+                if (response.data.status === 'succeeded') {
+                    // Очищаем корзину при успешной оплате
+                    clearBasket();
+                }
             } else {
-                console.error('Unexpected response format or missing status:', response.data);
                 setPaymentStatus('error');
             }
         })
         .catch(error => {
-            console.error('Error while fetching payment status:', error);
             setPaymentStatus('error');
         });
-    }, []);
+    }, [clearBasket]);
 
     useEffect(() => {
         if (orderId) {
             pollPaymentStatus(orderId);
         } else {
-            console.error('No order_id found in URL');
             setPaymentStatus('error');
         }
     }, [orderId, pollPaymentStatus]);

@@ -1,18 +1,13 @@
 import React from 'react';
 import styled from "styled-components";
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { Button } from "@mui/material";
-import { theme } from "../../styles/theme";
+import { theme } from "../../_globalStyles/theme";
 import logoA from '../../assets/images/logoA.svg';
-import {useBasket} from "../BasketContext";
+import {useBasket} from "../../pages/basket/BasketContext";
 
 export const Navigation = () => {
-	const navigate = useNavigate();
 	const { basket } = useBasket(); // Получаем товары в корзине
-
-	const handleNavigate = (path: string) => {
-		navigate(path);
-	};
 
 	return (
 		<GeneralDiv>
@@ -22,14 +17,8 @@ export const Navigation = () => {
 					<Logo src={logoA} alt="logo" />
 				</LogoLink>
 
-				<StyleDivForButton>
-					<StyledButton sx={{textTransform: 'none'}} onClick={() => handleNavigate('/order/payment')} variant="text" size="small">
-						<StyledNavLink to="/">Статус оплаты/</StyledNavLink>
-					</StyledButton>
-				</StyleDivForButton>
-
 				<StyleDivForButton style={{padding: '30px'}}>
-					<StyledButton sx={{textTransform: 'none'}} onClick={() => handleNavigate('/Basket')} variant="text" size="small">
+					<StyledButton sx={{textTransform: 'none'}} variant="text" size="small">
 						<StyledNavLink to="/Basket">Корзина/</StyledNavLink>
 						{basket.length !== 0 ? <BasketCount>{basket.length}</BasketCount> : ''} {/* Отображаем количество товаров */}
 					</StyledButton>
@@ -40,7 +29,7 @@ export const Navigation = () => {
 };
 
 const GeneralDiv = styled.div`
-  height: 81px;
+  height: 65px;
   width: 100%;
   background-color: ${theme.mainBackgroundColor};
   display: flex;
